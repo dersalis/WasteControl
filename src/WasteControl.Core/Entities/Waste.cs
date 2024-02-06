@@ -1,6 +1,6 @@
 namespace WasteControl.Core.Entities
 {
-    public class User : BaseEntity
+    public class Waste : BaseEntity
     {
         
     }
