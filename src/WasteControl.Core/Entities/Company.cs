@@ -13,19 +13,19 @@ namespace WasteControl.Core.Entities
         public Phone Phone { get; private set; }
         public Email Email { get; private set; }
 
-        public Company(string code, string name, string address, string city, string postalCode, string country, string phone, string email)
+        public Company(CompanyCode code, CompanyName name, Address address, City city, PostalCode postalCode, Country country, Phone phone, Email email)
         {
             Id = Guid.NewGuid();
-            Code = new CompanyCode(code);
-            Name = new CompanyName(name);
-            Address = new Address(address);
-            City = new City(city);
-            PostalCode = new PostalCode(postalCode);
-            Country = new Country(country);
-            Phone = new Phone(phone);
-            Email = new Email(email);
+            Code = code;
+            Name = name;
+            Address = address;
+            City = city;
+            PostalCode = postalCode;
+            Country = country;
+            Phone = phone;
+            Email = email;
         }
-        
+
         public void ChangeCompanyCode(string code)
         {
             Code = new CompanyCode(code);
