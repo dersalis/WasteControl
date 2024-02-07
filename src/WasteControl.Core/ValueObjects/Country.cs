@@ -17,7 +17,7 @@ namespace WasteControl.Core.ValueObjects
         }
 
         public override string ToString() => Value;
-        public static implicit operator string(CompanyCountry companyCountry) => companyCountry.Value;
-        public static implicit operator CompanyCountry(string companyCountry) => new(companyCountry);
+        public static implicit operator string(Country country) => country.Value;
+        public static implicit operator Country(string country) => new(country);
     }
 }

@@ -13,6 +13,7 @@ namespace WasteControl.Core.ValueObjects
                 throw new InvalidWasteCodeException(value);
             }
 
+            Value = value;
         }
 
         public override string ToString() => Value;

@@ -9,6 +9,11 @@ namespace WasteControl.Core.Entities
         public WasteQuantity Quantity { get; private set; }
         public WasteUnit Unit { get; private set; }
 
+        public Waste()
+        {
+            Id = Guid.NewGuid();
+        }
+
         public Waste(WasteCode code, WasteName name, WasteQuantity quantity, WasteUnit unit)
         {
             Id = Guid.NewGuid();
@@ -16,6 +21,7 @@ namespace WasteControl.Core.Entities
             Name = name;
             Quantity = quantity;
             Unit = unit;
+            IsActive = true;
         }
 
         public void ChangeCode(string code)

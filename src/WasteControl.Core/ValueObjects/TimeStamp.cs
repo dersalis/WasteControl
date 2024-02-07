@@ -8,7 +8,7 @@ namespace WasteControl.Core.ValueObjects
 
         public TimeStamp(DateTime value)
         {
-            if (value < DateTime.Now)
+            if (value.Date < DateTime.Now.Date)
             {
                 throw new SmallerTimeStampException(value);
             }
