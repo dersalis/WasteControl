@@ -14,7 +14,13 @@ namespace WasteControl.Core.Entities
 
         private readonly HashSet<Waste> _wastes = new();
 
-        public WasteExport(ReceivingCompany receivingCompany, TransportCompany transportCompany, TimeStamp bookingDate, WasteExportDescription description, WasteExportStatus status)
+        public WasteExport()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        public WasteExport(ReceivingCompany receivingCompany, TransportCompany transportCompany, TimeStamp bookingDate, 
+            WasteExportDescription description, WasteExportStatus status)
         {
             Id = Guid.NewGuid();
             ReceivingCompany = receivingCompany;

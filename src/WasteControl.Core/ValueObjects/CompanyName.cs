@@ -2,7 +2,7 @@ using WasteControl.Core.Exceptions;
 
 namespace WasteControl.Core.ValueObjects
 {
-    public class CompanyName
+    public sealed record CompanyName
     {
         public string Value { get; }
 
