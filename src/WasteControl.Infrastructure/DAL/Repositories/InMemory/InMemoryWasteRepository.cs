@@ -1,4 +1,3 @@
-using FizzWare.NBuilder;
 using WasteControl.Core.Entities;
 using WasteControl.Core.ValueObjects;
 using WasteControl.Infrastructure.Abstractions;
@@ -34,26 +33,5 @@ namespace WasteControl.Infrastructure.DAL.Repositories.InMemory
 
         public Task UpdateAsync(Waste entity)
             => Task.CompletedTask;
-
-
-        private List<Waste> GenerateData()
-        {
-
-            List<Waste> wastes = Builder<Waste>
-                .CreateListOfSize(20)
-                .All()
-                .WithFactory(() => new Waste(
-                    new WasteCode($"CODE-{Faker.RandomNumber.Next(1, 999).ToString("D4")}"),
-                    new WasteName(Faker.Company.Name()),
-                    new WasteQuantity(Faker.RandomNumber.Next(10, 100)),
-                    new WasteUnit("kg")
-                ))
-                .Do(w => w.ChangeCreateDate(new TimeStamp(DateTime.Now)))
-                .Build()
-                .ToList();
-
-
-            return wastes;
-        }
     }
 }

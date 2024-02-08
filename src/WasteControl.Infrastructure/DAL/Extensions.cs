@@ -11,6 +11,10 @@ namespace WasteControl.Infrastructure.DAL
         public static IServiceCollection AddPostgres(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IRepository<Waste>, InMemoryWasteRepository>();
+            services.AddScoped<IRepository<ReceivingCompany>, InMemoryReceivingCompanyRepository>();
+            services.AddScoped<IRepository<TransportCompany>, InMemoryTransportCompanyRepository>();
+            services.AddScoped<IRepository<WasteExport>, InMemoryWasteExportRepository>();
+            services.AddScoped<IRepository<User>, InMemoryUserRepository>();
             
             return services;
         }
