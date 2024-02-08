@@ -11,8 +11,7 @@ namespace WasteControl.Infrastructure.DAL.Repositories.InMemory
 
         public InMemoryWasteRepository()
         {
-            // _wastes = new List<Waste>();
-            _wastes = GenerateData();
+            _wastes = FakeDataGenerator.GenerateWastes();
         }
 
         public Task AddAsync(Waste entity)

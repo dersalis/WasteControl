@@ -31,7 +31,7 @@ namespace WasteControl.Infrastructure.DAL
             return _users;
         }
 
-        public static void GenerateWastes()
+        public static List<Waste> GenerateWastes()
         {
             if (_wastes == null)
             {
@@ -51,6 +51,8 @@ namespace WasteControl.Infrastructure.DAL
                 .Build()
                 .ToList();
             }
+
+            return _wastes;
         }
 
         public static List<ReceivingCompany> GenerateReceivingCompanies()

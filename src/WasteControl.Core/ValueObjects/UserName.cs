@@ -15,5 +15,8 @@ namespace WasteControl.Core.ValueObjects
 
             Value = value;
         }
+
+        public static implicit operator string(UserName userName) => userName.Value;
+        public static implicit operator UserName(string value) => new(value);
     }
 }

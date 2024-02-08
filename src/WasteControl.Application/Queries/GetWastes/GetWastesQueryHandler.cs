@@ -27,9 +27,9 @@ namespace WasteControl.Application.Queries.GetWastes
                 Unit = w.Unit.Value,
                 IsActive = w.IsActive,
                 CreateDate = w.CreateDate?.Value,
-                CreatedByName = w.CreatedBy?.Name,
+                CreatedByName = w.CreateDate is not null ? w.CreatedBy?.Name : "",
                 ModifiedDate = w.ModifiedDate?.Value,
-                ModifiedBy = w.ModifiedBy?.Name,
+                ModifiedBy = w.ModifiedBy is not null ? w.ModifiedBy?.Name : "",
             });
         }
     }
