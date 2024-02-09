@@ -1,0 +1,21 @@
+@WasteControl.Api_HostAddress = http://localhost:5012
+@url = http://localhost:5012
+
+###
+GET {{url}}/wastes
+Accept: application/json
+
+###
+GET {{url}}/wastes/94c70b13-e1b3-4d53-834e-c814c5d740dd
+Accept: application/json
+
+###
+POST {{url}}/wastes
+Content-Type: application/json
+
+{
+  "code": "TEST-001",
+  "name": "Test 1 description",
+  "quantity": 20,
+  "unit": "kg"
+}

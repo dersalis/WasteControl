@@ -3,9 +3,9 @@ using WasteControl.Application.DTO;
 using WasteControl.Core.Entities;
 using WasteControl.Infrastructure.Abstractions;
 
-namespace WasteControl.Application.Queries.GetWastes
+namespace WasteControl.Application.Queries.Wastes.GetWastes
 {
-    public class GetWastesQueryHandler : IRequestHandler<GetWastesQuery, IEnumerable<WasteDto>>
+    internal class GetWastesQueryHandler : IRequestHandler<GetWastesQuery, IEnumerable<WasteDto>>
     {
         private readonly IRepository<Waste> _wasteRepository;
 
