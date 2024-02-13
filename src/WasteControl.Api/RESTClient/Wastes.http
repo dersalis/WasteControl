@@ -6,7 +6,7 @@ GET {{url}}/wastes
 Accept: application/json
 
 ###
-GET {{url}}/wastes/94c70b13-e1b3-4d53-834e-c814c5d740dd
+GET {{url}}/wastes/ab3ef5ce-136b-46da-bb4e-f115bd8555d9
 Accept: application/json
 
 ###
@@ -14,8 +14,25 @@ POST {{url}}/wastes
 Content-Type: application/json
 
 {
-  "code": "TEST-001",
-  "name": "Test 1 description",
+  "code": "TEST-1001",
+  "name": "Test 1001 description",
   "quantity": 20,
   "unit": "kg"
 }
+
+
+###
+PUT {{url}}/wastes/ab3ef5ce-136b-46da-bb4e-f115bd8555d9
+Content-Type: application/json
+
+{
+    "id": "ab3ef5ce-136b-46da-bb4e-f115bd8555d9",
+  "code": "TEST-999",
+  "name": "Test 999 description",
+  "quantity": 20,
+  "unit": "kg"
+}
+
+###
+DELETE {{url}}/wastes/ab3ef5ce-136b-46da-bb4e-f115bd8555d9
+Accept: application/json
