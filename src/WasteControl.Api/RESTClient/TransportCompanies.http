@@ -1,0 +1,45 @@
+@url = http://localhost:5012
+@controller = transport-company
+
+###
+GET {{url}}/{{controller}}
+Accept: application/json
+
+###
+GET {{url}}/{{controller}}/de9c3e0e-e0e9-457c-acfb-82e92f3cd639
+Accept: application/json
+
+###
+POST {{url}}/{{controller}}
+Content-Type: application/json
+
+{
+    "code": "CODE-9035",
+    "name": "Farrell, Bartell and O'Reilly",
+    "address": "799 Marina Street",
+    "city": "East Sedrick",
+    "postalCode": "88-945",
+    "country": "Lebanon",
+    "phone": "+48798618278",
+    "email": "maximillia.spencer@bradtkeconnelly.com"
+}
+
+###
+PUT {{url}}/{{controller}}/de9c3e0e-e0e9-457c-acfb-82e92f3cd639
+Content-Type: application/json
+
+{
+    "id": "de9c3e0e-e0e9-457c-acfb-82e92f3cd639",
+    "code": "CODE-9935",
+    "name": "Farrell, Bartell and O'Reilly",
+    "address": "799 Marina Street",
+    "city": "East Sedrick",
+    "postalCode": "88-945",
+    "country": "Lebanon",
+    "phone": "+48798618278",
+    "email": "maximillia.spencer@bradtkeconnelly.com"
+}
+
+###
+DELETE  {{url}}/{{controller}}/de9c3e0e-e0e9-457c-acfb-82e92f3cd639
+Accept: application/json

@@ -1,0 +1,44 @@
+@url = http://localhost:5012
+
+###
+GET {{url}}/receiving-companies
+Accept: application/json
+
+###
+GET {{url}}/receiving-companies/e2fd3f43-c49d-4750-b996-f63c1c917846
+Accept: application/json
+
+###
+POST {{url}}/receiving-companies
+Content-Type: application/json
+
+{
+    "code": "CODE-9035",
+    "name": "Farrell, Bartell and O'Reilly",
+    "address": "799 Marina Street",
+    "city": "East Sedrick",
+    "postalCode": "88-945",
+    "country": "Lebanon",
+    "phone": "+48798618278",
+    "email": "maximillia.spencer@bradtkeconnelly.com"
+}
+
+###
+PUT {{url}}/receiving-companies/e2fd3f43-c49d-4750-b996-f63c1c917846
+Content-Type: application/json
+
+{
+    "id": "e2fd3f43-c49d-4750-b996-f63c1c917846",
+    "code": "CODE-9935",
+    "name": "Farrell, Bartell and O'Reilly",
+    "address": "799 Marina Street",
+    "city": "East Sedrick",
+    "postalCode": "88-945",
+    "country": "Lebanon",
+    "phone": "+48798618278",
+    "email": "maximillia.spencer@bradtkeconnelly.com"
+}
+
+###
+DELETE  {{url}}/receiving-companies/e2fd3f43-c49d-4750-b996-f63c1c917846
+Accept: application/json

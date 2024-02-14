@@ -1,4 +1,3 @@
-@WasteControl.Api_HostAddress = http://localhost:5012
 @url = http://localhost:5012
 
 ###
@@ -6,7 +5,7 @@ GET {{url}}/wastes
 Accept: application/json
 
 ###
-GET {{url}}/wastes/ab3ef5ce-136b-46da-bb4e-f115bd8555d9
+GET {{url}}/wastes/1322b562-2a05-4ac9-8709-8dd5ac1252fb
 Accept: application/json
 
 ###

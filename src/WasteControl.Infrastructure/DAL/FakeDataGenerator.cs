@@ -41,7 +41,7 @@ namespace WasteControl.Infrastructure.DAL
                 .CreateListOfSize(60)
                 .All()
                 .WithFactory(() => new Waste(
-                    new WasteCode($"CODE-{Faker.RandomNumber.Next(1, 999).ToString("D4")}"),
+                    new WasteCode(RandomCode()),
                     new WasteName(Faker.Company.Name()),
                     new WasteQuantity(Faker.RandomNumber.Next(10, 100)),
                     new WasteUnit("kg")
@@ -59,19 +59,19 @@ namespace WasteControl.Infrastructure.DAL
         {
             if (_receivingCompanies == null)
             {
-                User user = GenerateUsers().Last();
+                User user = GenerateUsers().First();
 
                 _receivingCompanies = Builder<ReceivingCompany>
                 .CreateListOfSize(20)
                 .All()
                 .WithFactory(() => new ReceivingCompany(
-                    new CompanyCode($"CODE-{Faker.RandomNumber.Next(1, 999).ToString("D4")}"),
+                    new CompanyCode(RandomCode()),
                     new CompanyName(Faker.Company.Name()),
                     new Address(Faker.Address.StreetAddress()),
                     new City(Faker.Address.City()),
-                    new PostalCode(Faker.Address.ZipCode()),
+                    new PostalCode(RandomPostalCode()),
                     new Country(Faker.Address.Country()),
-                    new Phone(Faker.Phone.Number()),
+                    new Phone(RandomPhoneNumber()),
                     new Email(Faker.Internet.Email())
                 ))
                 .Do(c => c.ChangeCreateDate(new TimeStamp(DateTime.Now)))
@@ -87,19 +87,19 @@ namespace WasteControl.Infrastructure.DAL
         {
             if (_transportCompanies == null)
             {
-                User user = GenerateUsers().Last();
+                User user = GenerateUsers().First();
 
                 _transportCompanies = Builder<TransportCompany>
                 .CreateListOfSize(20)
                 .All()
                 .WithFactory(() => new TransportCompany(
-                    new CompanyCode($"CODE-{Faker.RandomNumber.Next(1, 999).ToString("D4")}"),
+                    new CompanyCode(RandomCode()),
                     new CompanyName(Faker.Company.Name()),
                     new Address(Faker.Address.StreetAddress()),
                     new City(Faker.Address.City()),
-                    new PostalCode(Faker.Address.ZipCode()),
+                    new PostalCode(RandomPostalCode()),
                     new Country(Faker.Address.Country()),
-                    new Phone(Faker.Phone.Number()),
+                    new Phone(RandomPhoneNumber()),
                     new Email(Faker.Internet.Email())
                 ))
                 .Do(c => c.ChangeCreateDate(new TimeStamp(DateTime.Now)))
@@ -115,7 +115,7 @@ namespace WasteControl.Infrastructure.DAL
         {
             if (_wasteExports == null)
             {
-                User user = GenerateUsers().Last();
+                User user = GenerateUsers().First();
                 ReceivingCompany receivingCompany = GenerateReceivingCompanies().First();
                 TransportCompany transportCompany = GenerateTransportCompanies().First();
 
@@ -137,5 +137,14 @@ namespace WasteControl.Infrastructure.DAL
 
             return _wasteExports;
         }
+
+        private static string RandomCode()
+            => $"CODE-{Faker.RandomNumber.Next(1, 999).ToString("D4")}";
+
+        private static string RandomPhoneNumber()
+            => $"+48{Faker.RandomNumber.Next(600000000, 999999999)}";
+
+        private static string RandomPostalCode()
+            => $"{Faker.RandomNumber.Next(10, 99).ToString("D2")}-{Faker.RandomNumber.Next(100, 999).ToString("D3")}";
     }
 }

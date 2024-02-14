@@ -9,6 +9,12 @@ namespace WasteControl.Application.Commands.ReceivingCompanies.CreateReceivingCo
     {
         public readonly IRepository<ReceivingCompany> _receivingCompanyRepository;
         public readonly IRepository<User> _userRepository;
+
+        public CreateReceivingCompanyCommandHandler(IRepository<ReceivingCompany> receivingCompanyRepository, IRepository<User> userRepository)
+        {
+            _receivingCompanyRepository = receivingCompanyRepository;
+            _userRepository = userRepository;
+        }
         
         public async Task<Guid> Handle(CreateReceivingCompanyCommand request, CancellationToken cancellationToken)
         {

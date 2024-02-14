@@ -24,6 +24,7 @@ namespace WasteControl.Core.Entities
             Country = country;
             Phone = phone;
             Email = email;
+            IsActive = true;
         }
 
         public void ChangeCompanyCode(string code)
