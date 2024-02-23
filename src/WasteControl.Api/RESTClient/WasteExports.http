@@ -1,0 +1,41 @@
+@url = http://localhost:5012
+@selectedExport = 75dc9038-b808-4bc1-8986-ca03821c9bdd
+###
+GET {{url}}/waste-export
+Accept: application/json
+
+###
+GET {{url}}/waste-export/{{selectedExport}}
+Accept: application/json
+
+###
+GET {{url}}/waste-export/{{selectedExport}}/wastes
+Accept: application/json
+
+###
+POST {{url}}/waste-export
+Content-Type: application/json
+
+{
+  "receivingCompanyOid": "32b09be0-1e44-44f6-b78f-17c9477aadd7",
+  "transportCompanyOid": "1351b586-fa56-4d65-95cd-5092d7121e67",
+  "bookingDate": "2024-02-26",
+  "description": "Test 2024"
+}
+
+
+###
+PUT {{url}}/waste-export/{{selectedExport}}
+Content-Type: application/json
+
+{
+  "id": "{{selectedExport}}",
+  "receivingCompanyOid": "32b09be0-1e44-44f6-b78f-17c9477aadd7",
+  "transportCompanyOid": "1351b586-fa56-4d65-95cd-5092d7121e67",
+  "bookingDate": "2024-02-26",
+  "description": "Test 2029"
+}
+
+###
+DELETE {{url}}/waste-export/{{selectedExport}}
+Accept: application/json

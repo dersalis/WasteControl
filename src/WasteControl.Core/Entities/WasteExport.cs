@@ -28,6 +28,7 @@ namespace WasteControl.Core.Entities
             BookingDate = bookingDate;
             Description = description;
             Status = status;
+            IsActive = true;
         }
 
         public WasteExport(TimeStamp bookingDate, WasteExportDescription description, WasteExportStatus status)
@@ -36,6 +37,7 @@ namespace WasteControl.Core.Entities
             BookingDate = bookingDate;
             Description = description;
             Status = status;
+            IsActive = true;
         }
 
         public void AddReceivingCompany(ReceivingCompany receivingCompany)

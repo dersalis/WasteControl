@@ -10,9 +10,9 @@ namespace WasteControl.Api.Controllers
 {
     [ApiController]
     [Route("wastes")]
-    public class WasteController : ControllerBaseApi
+    public class WastesController : ControllerBaseApi
     {
-        public WasteController(IMediator mediator) : base(mediator)
+        public WastesController(IMediator mediator) : base(mediator)
         {
         }
 
