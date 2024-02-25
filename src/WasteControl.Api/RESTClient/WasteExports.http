@@ -1,5 +1,5 @@
 @url = http://localhost:5012
-@selectedExport = 75dc9038-b808-4bc1-8986-ca03821c9bdd
+@selectedExport = 11234d72-a625-4cb2-b1c4-fb7c7c9b4f63
 ###
 GET {{url}}/waste-export
 Accept: application/json
@@ -39,3 +39,30 @@ Content-Type: application/json
 ###
 DELETE {{url}}/waste-export/{{selectedExport}}
 Accept: application/json
+
+
+###
+PUT {{url}}/waste-export/{{selectedExport}}/add-wastes
+Content-Type: application/json
+
+{
+  "wasteExportId": "11234d72-a625-4cb2-b1c4-fb7c7c9b4f63",
+  "wastes": [
+    "d3d8da49-aa30-49a5-ac36-27ddac1ff8ec",
+    "09805973-af71-4619-8dd4-81dd71f663ef"
+  ]
+}
+
+###
+DELETE  {{url}}/waste-export/{{selectedExport}}/delete-waste/09805973-af71-4619-8dd4-81dd71f663ef
+Content-Type: application/json
+
+
+###
+PUT {{url}}/waste-export/{{selectedExport}}/add-receivingcompany/a83322ac-fe78-447e-88e3-c5a5b80a30f3
+Content-Type: application/json
+
+
+###
+PUT {{url}}/waste-export/{{selectedExport}}/add-transportcompany/4fde0cc9-b158-4466-bd3f-cd93bb6bdb69
+Content-Type: application/json

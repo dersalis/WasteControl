@@ -38,7 +38,7 @@ namespace WasteControl.Application.Commands.WasteExports.CreateWasteExport
                 throw new TransportCompanyNotFoundException();
 
             WasteExport wasteExport = new WasteExport(receivingCompany, transportCompany, 
-                request.BookingDate, request.Description, WasteExportStatus.Waiting);
+            request.BookingDate, request.Description, WasteExportStatus.Waiting);
             wasteExport.ChangeCreateDate(currentDate);
             wasteExport.ChangeCreatedBy(user);
 

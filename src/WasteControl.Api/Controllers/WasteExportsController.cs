@@ -1,6 +1,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WasteControl.Application.Commands.WasteExports.AddReceiver;
+using WasteControl.Application.Commands.WasteExports.AddTransporter;
+using WasteControl.Application.Commands.WasteExports.AddWastes;
 using WasteControl.Application.Commands.WasteExports.CreateWasteExport;
+using WasteControl.Application.Commands.WasteExports.DeleteWaste;
 using WasteControl.Application.Commands.WasteExports.DeleteWasteExport;
 using WasteControl.Application.Commands.WasteExports.UpdateWasteExport;
 using WasteControl.Application.Queries.WasteExports.GetWasteExportById;
@@ -72,10 +76,10 @@ namespace WasteControl.Api.Controllers
             return Ok(wastes);
         }
 
-        [HttpPut("{id:guid}/addwastes")]
+        [HttpPut("{id:guid}/add-wastes")]
         public async Task<IActionResult> AddWastes([FromRoute] Guid id, [FromBody] AddWastesCommand command)
         {
-            if (id != command.Id)
+            if (id != command.WasteExportId)
                 return BadRequest();
 
             await _mediator.Send(command);
@@ -83,26 +87,26 @@ namespace WasteControl.Api.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id:guid}/removewaste/{wasteId:guid}")]
-        public async Task<IActionResult> RemoveWaste([FromRoute] Guid id, [FromRoute] Guid wasteId)
+        [HttpDelete("{id:guid}/delete-waste/{wasteId:guid}")]
+        public async Task<IActionResult> DeleteWaste([FromRoute] Guid id, [FromRoute] Guid wasteId)
         {
-            await _mediator.Send(new RemoveWasteCommand() { Id = id, WasteId = wasteId });
+            await _mediator.Send(new DeleteWasteCommand() { WasteExportId = id, WasteId = wasteId });
 
             return NoContent();
         }
 
-        [HttpPut("{id:guid}/addreceivingcompany/{receiverId:guid}")]
+        [HttpPut("{id:guid}/add-receivingcompany/{receiverId:guid}")]
         public async Task<IActionResult> AddReceivingCompany([FromRoute] Guid id, [FromRoute] Guid receiverId)
         {
-            await _mediator.Send(new AddReceiverCommand() { Id = id, ReceiverId = receiverId });
+            await _mediator.Send(new AddReceiverCommand() { WasteExportId = id, ReceiverId = receiverId });
 
             return NoContent();
         }
 
-        [HttpPut("{id:guid}/addtransportcompany/{receiverId:guid}")]
+        [HttpPut("{id:guid}/add-transportcompany/{receiverId:guid}")]
         public async Task<IActionResult> AddTransportCompany([FromRoute] Guid id, [FromRoute] Guid receiverId)
         {
-            await _mediator.Send(new AddTransporterCommand() { Id = id, TransporterId = receiverId });
+            await _mediator.Send(new AddTransporterCommand() { WasteExportId = id, TransporterId = receiverId });
 
             return NoContent();
         }
