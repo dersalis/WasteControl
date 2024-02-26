@@ -5,8 +5,8 @@ namespace WasteControl.Core.Entities
 {
     public class WasteExport : BaseEntity
     {
-        public ReceivingCompany? ReceivingCompany { get; private set; }
-        public TransportCompany? TransportCompany { get; private set; }
+        public ID? ReceivingCompanyId { get; private set; }
+        public ID? TransportCompanyId { get; private set; }
         public TimeStamp BookingDate { get; private set; }
         public WasteExportDescription Description { get; private set; }
         public WasteExportStatus Status { get; private set; }
@@ -23,8 +23,8 @@ namespace WasteControl.Core.Entities
             WasteExportDescription description, WasteExportStatus status)
         {
             Id = Guid.NewGuid();
-            ReceivingCompany = receivingCompany;
-            TransportCompany = transportCompany;
+            ReceivingCompanyId = receivingCompany.Id;
+            TransportCompanyId = transportCompany.Id;
             BookingDate = bookingDate;
             Description = description;
             Status = status;
@@ -42,22 +42,22 @@ namespace WasteControl.Core.Entities
 
         public void AddReceivingCompany(ReceivingCompany receivingCompany)
         {
-            ReceivingCompany = receivingCompany;
+            ReceivingCompanyId = receivingCompany.Id;
         }
 
         public void DeleteReceivingCompany()
         {
-            ReceivingCompany = null;
+            ReceivingCompanyId = null;
         }
 
         public void AddTransportCompany(TransportCompany transportCompany)
         {
-            TransportCompany = transportCompany;
+            TransportCompanyId = transportCompany.Id;
         }
 
         public void DeleteTransportCompany()
         {
-            TransportCompany = null;
+            TransportCompanyId = null;
         }
 
         public void ChangeBookingDate(TimeStamp bookingDate)

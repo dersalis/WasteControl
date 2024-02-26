@@ -7,9 +7,9 @@ namespace WasteControl.Core.Entities
         public ID Id { get; protected set; }
         public Activity IsActive { get; protected set; }
         public TimeStamp? CreateDate { get; protected set; }
-        public User? CreatedBy { get; protected set; }
+        public ID? CreatedById { get; protected set; }
         public TimeStamp? ModifiedDate { get; protected set; }
-        public User? ModifiedBy { get; protected set; }
+        public ID? ModifiedById { get; protected set; }
 
         public void ChangeActivity(bool isActive)
         {
@@ -23,7 +23,7 @@ namespace WasteControl.Core.Entities
 
         public void ChangeCreatedBy(User createdBy)
         {
-            CreatedBy = createdBy;
+            CreatedById = createdBy.Id;
         }
 
         public void ChangeModifiedDate(TimeStamp modifiedDate)
@@ -33,7 +33,7 @@ namespace WasteControl.Core.Entities
 
         public void ChangeModifiedBy(User modifiedBy)
         {
-            ModifiedBy = modifiedBy;
+            ModifiedById = modifiedBy.Id;
         }
     }
 }

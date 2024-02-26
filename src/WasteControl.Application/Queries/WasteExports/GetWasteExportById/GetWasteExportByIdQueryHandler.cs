@@ -24,8 +24,8 @@ namespace WasteControl.Application.Queries.WasteExports.GetWasteExportById
             return new WasteExportDto
             {
                 Id = wasteExport.Id,
-                ReceivingCompanyName = wasteExport.ReceivingCompany is not null ? $"[{wasteExport.ReceivingCompany?.Code}] {wasteExport.ReceivingCompany?.Name}" : "",
-                TransportCompanyName = wasteExport.TransportCompany is not null ? $"[{wasteExport.TransportCompany?.Code}] {wasteExport.TransportCompany?.Name}" : "",
+                ReceivingCompanyName = wasteExport.ReceivingCompanyId is not null ? $"[{wasteExport.ReceivingCompanyId?.Code}] {wasteExport.ReceivingCompanyId?.Name}" : "",
+                TransportCompanyName = wasteExport.TransportCompanyId is not null ? $"[{wasteExport.TransportCompanyId?.Code}] {wasteExport.TransportCompanyId?.Name}" : "",
                 BookingDate = wasteExport.BookingDate,
                 Description = wasteExport.Description,
                 Status = wasteExport.Status,
