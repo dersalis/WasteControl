@@ -5,7 +5,7 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Queries.WasteExports.GetWasteExports
 {
-    public class GetWasteExportsQueryHandler : IRequestHandler<GetWasteExportsQuery, IEnumerable<WasteExportDto>>
+    internal sealed class GetWasteExportsQueryHandler : IRequestHandler<GetWasteExportsQuery, IEnumerable<WasteExportDto>>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
 

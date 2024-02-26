@@ -5,7 +5,7 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Queries.ReceivingCompanies.GetReceivingCompanyById
 {
-    public class GetReceivingCompanyByIdQueryHandler : IRequestHandler<GetReceivingCompanyByIdQuery, CompanyDto>
+    internal sealed class GetReceivingCompanyByIdQueryHandler : IRequestHandler<GetReceivingCompanyByIdQuery, CompanyDto>
     {
         public readonly IRepository<ReceivingCompany> _companyRepository;
 
@@ -17,6 +17,9 @@ namespace WasteControl.Application.Queries.ReceivingCompanies.GetReceivingCompan
         public async Task<CompanyDto> Handle(GetReceivingCompanyByIdQuery request, CancellationToken cancellationToken)
         {
             var company = await _companyRepository.GetAsync(request.Id);
+
+            if (company is null)
+                return default;
 
             return new CompanyDto
             {

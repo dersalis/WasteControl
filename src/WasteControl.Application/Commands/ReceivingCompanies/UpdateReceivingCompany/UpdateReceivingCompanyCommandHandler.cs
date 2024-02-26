@@ -5,7 +5,7 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.ReceivingCompanies.UpdateReceivingCompany
 {
-    public class UpdateReceivingCompanyCommandHandler : IRequestHandler<UpdateReceivingCompanyCommand>
+    internal sealed class UpdateReceivingCompanyCommandHandler : IRequestHandler<UpdateReceivingCompanyCommand>
     {
         private readonly IRepository<ReceivingCompany> _receivingCompanyRepository;
         private readonly IRepository<User> _userRepository;

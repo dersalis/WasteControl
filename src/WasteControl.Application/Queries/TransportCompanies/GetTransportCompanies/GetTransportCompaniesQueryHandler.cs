@@ -5,7 +5,7 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Queries.TransportCompanies.GetTransportCompanies
 {
-    public class GetTransportCompaniesQueryHandler : IRequestHandler<GetTransportCompaniesQuery, IEnumerable<CompanyDto>>
+    internal sealed class GetTransportCompaniesQueryHandler : IRequestHandler<GetTransportCompaniesQuery, IEnumerable<CompanyDto>>
     {
         private readonly IRepository<TransportCompany> _companyRepository;
         public GetTransportCompaniesQueryHandler(IRepository<TransportCompany> companyRepository)

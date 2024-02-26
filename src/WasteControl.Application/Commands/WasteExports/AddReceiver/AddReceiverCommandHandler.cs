@@ -5,7 +5,7 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.WasteExports.AddReceiver
 {
-    public class AddReceiverCommandHandler : IRequestHandler<AddReceiverCommand>
+    internal sealed class AddReceiverCommandHandler : IRequestHandler<AddReceiverCommand>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
         private readonly IRepository<User> _userRepository;

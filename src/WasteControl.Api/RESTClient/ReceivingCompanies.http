@@ -1,11 +1,12 @@
 @url = http://localhost:5012
+@selected = 864981ea-9486-4107-bfd8-dc34b26adf43
 
 ###
 GET {{url}}/receiving-companies
 Accept: application/json
 
 ###
-GET {{url}}/receiving-companies/e2fd3f43-c49d-4750-b996-f63c1c917846
+GET {{url}}/receiving-companies/{{selected}}
 Accept: application/json
 
 ###

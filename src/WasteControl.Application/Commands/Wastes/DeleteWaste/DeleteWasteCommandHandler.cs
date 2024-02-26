@@ -5,7 +5,7 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.Wastes.DeleteWaste
 {
-    internal class DeleteWasteCommandHandler : IRequestHandler<DeleteWasteCommand>
+    internal sealed class DeleteWasteCommandHandler : IRequestHandler<DeleteWasteCommand>
     {
         private readonly IRepository<User> _userRepository;
         private readonly IRepository<Waste> _wasteRepository;

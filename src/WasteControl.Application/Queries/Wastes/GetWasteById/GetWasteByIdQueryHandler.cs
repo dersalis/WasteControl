@@ -5,7 +5,7 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Queries.Wastes.GetWasteById
 {
-    internal class GetWasteByIdQueryHandler : IRequestHandler<GetWasteByIdQuery, WasteDto>
+    internal sealed class GetWasteByIdQueryHandler : IRequestHandler<GetWasteByIdQuery, WasteDto>
     {
         private readonly IRepository<Waste> _wasteRepository;
         
@@ -17,6 +17,9 @@ namespace WasteControl.Application.Queries.Wastes.GetWasteById
         public async Task<WasteDto> Handle(GetWasteByIdQuery request, CancellationToken cancellationToken)
         {
             var waste = await _wasteRepository.GetAsync(request.Id);
+
+            if (waste is null)
+                return default;
 
             return new WasteDto
             {

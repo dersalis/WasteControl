@@ -6,7 +6,7 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.WasteExports.CreateWasteExport
 {
-    public class CreateWasteExportCommandHandler : IRequestHandler<CreateWasteExportCommand, Guid>
+    internal sealed class CreateWasteExportCommandHandler : IRequestHandler<CreateWasteExportCommand, Guid>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
         private readonly IRepository<User> _userRepository;

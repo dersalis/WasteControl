@@ -5,7 +5,7 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.Wastes.UpdateWaste
 {
-    internal class UpdateWasteCommandHandler : IRequestHandler<UpdateWasteCommand>
+    internal sealed class UpdateWasteCommandHandler : IRequestHandler<UpdateWasteCommand>
     {
         private readonly IRepository<User> _userRepository;
         private readonly IRepository<Waste> _wasteRepository;

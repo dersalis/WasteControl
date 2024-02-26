@@ -5,7 +5,7 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.WasteExports.AddTransporter
 {
-    public class AddTransporterCommandHandler : IRequestHandler<AddTransporterCommand>
+    internal sealed class AddTransporterCommandHandler : IRequestHandler<AddTransporterCommand>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
         private readonly IRepository<User> _userRepository;

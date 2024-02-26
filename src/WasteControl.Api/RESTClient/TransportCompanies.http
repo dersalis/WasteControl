@@ -1,12 +1,13 @@
 @url = http://localhost:5012
 @controller = transport-company
+@selected = bb8074d0-f7ae-4219-bb74-a604587e9a51
 
 ###
 GET {{url}}/{{controller}}
 Accept: application/json
 
 ###
-GET {{url}}/{{controller}}/de9c3e0e-e0e9-457c-acfb-82e92f3cd639
+GET {{url}}/{{controller}}/{{selected}}
 Accept: application/json
 
 ###

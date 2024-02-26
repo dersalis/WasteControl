@@ -5,7 +5,7 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Queries.ReceivingCompanies.GetReceivingCompanies
 {
-    public class GetReceivingCompaniesQueryHandler : IRequestHandler<GetReceivingCompaniesQuery, IEnumerable<CompanyDto>>
+    internal sealed class GetReceivingCompaniesQueryHandler : IRequestHandler<GetReceivingCompaniesQuery, IEnumerable<CompanyDto>>
     {
         private readonly IRepository<ReceivingCompany> _companyRepository;
 
