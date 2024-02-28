@@ -20,17 +20,17 @@ namespace WasteControl.Infrastructure.Exceptions
         }
 
         private async Task HandleExceptionAsync(Exception exceptions, HttpContext context)
-    {
-        var (statusCode, error) = exceptions switch
         {
-            BaseException  => (StatusCodes.Status400BadRequest, new Error(exceptions.GetType()
-            .Name.Underscore().Replace("_exception", string.Empty), exceptions.Message)),
-            _ => (StatusCodes.Status500InternalServerError, new Error("error", "Something went wrong"))
-        };
+            var (statusCode, error) = exceptions switch
+            {
+                BaseException  => (StatusCodes.Status400BadRequest, new Error(exceptions.GetType()
+                .Name.Underscore().Replace("_exception", string.Empty), exceptions.Message)),
+                _ => (StatusCodes.Status500InternalServerError, new Error("error", "Something went wrong"))
+            };
 
-        context.Response.StatusCode = statusCode;
-        context.Response.WriteAsJsonAsync(error);
-    }
+            context.Response.StatusCode = statusCode;
+            context.Response.WriteAsJsonAsync(error);
+        }
     }
 
     internal record Error(string Code, string Reason);
