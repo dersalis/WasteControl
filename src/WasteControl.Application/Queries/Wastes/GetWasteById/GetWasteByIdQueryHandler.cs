@@ -8,10 +8,12 @@ namespace WasteControl.Application.Queries.Wastes.GetWasteById
     internal sealed class GetWasteByIdQueryHandler : IRequestHandler<GetWasteByIdQuery, WasteDto>
     {
         private readonly IRepository<Waste> _wasteRepository;
-        
-        public GetWasteByIdQueryHandler(IRepository<Waste> wasteRepository)
+        private readonly IRepository<User> _userRepository;
+
+        public GetWasteByIdQueryHandler(IRepository<Waste> wasteRepository, IRepository<User> userRepository)
         {
             _wasteRepository = wasteRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<WasteDto> Handle(GetWasteByIdQuery request, CancellationToken cancellationToken)
@@ -20,6 +22,9 @@ namespace WasteControl.Application.Queries.Wastes.GetWasteById
 
             if (waste is null)
                 return default;
+
+            var createdBy = await _userRepository.GetAsync(waste.CreatedById);
+            var modifiedBy = await _userRepository.GetAsync(waste.ModifiedById);
 
             return new WasteDto
             {
@@ -30,9 +35,9 @@ namespace WasteControl.Application.Queries.Wastes.GetWasteById
                 Unit = waste.Unit.Value,
                 IsActive = waste.IsActive,
                 CreateDate = waste.CreateDate?.Value,
-                CreatedByName = waste.CreateDate is not null ? waste.CreatedBy?.Name : "",
+                CreatedByName = createdBy is not null ? createdBy?.Name : "",
                 ModifiedDate = waste.ModifiedDate?.Value,
-                ModifiedBy = waste.ModifiedBy is not null ? waste.ModifiedBy?.Name : "",
+                ModifiedBy = modifiedBy is not null ? modifiedBy?.Name : "",
             };
         }
     }

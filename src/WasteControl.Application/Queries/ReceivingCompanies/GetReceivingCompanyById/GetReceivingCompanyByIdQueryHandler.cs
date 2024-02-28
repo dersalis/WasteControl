@@ -7,7 +7,8 @@ namespace WasteControl.Application.Queries.ReceivingCompanies.GetReceivingCompan
 {
     internal sealed class GetReceivingCompanyByIdQueryHandler : IRequestHandler<GetReceivingCompanyByIdQuery, CompanyDto>
     {
-        public readonly IRepository<ReceivingCompany> _companyRepository;
+        private readonly IRepository<ReceivingCompany> _companyRepository;
+        private readonly IRepository<User> _userRepository;
 
         public GetReceivingCompanyByIdQueryHandler(IRepository<ReceivingCompany> companyRepository)
         {
@@ -20,6 +21,9 @@ namespace WasteControl.Application.Queries.ReceivingCompanies.GetReceivingCompan
 
             if (company is null)
                 return default;
+
+            var createdBy = await _userRepository.GetAsync(company.CreatedById);
+            var modifiedBy = await _userRepository.GetAsync(company.ModifiedById);
 
             return new CompanyDto
             {
@@ -34,9 +38,9 @@ namespace WasteControl.Application.Queries.ReceivingCompanies.GetReceivingCompan
                 Email = company.Email.Value,
                 IsActive = company.IsActive,
                 CreateDate = company.CreateDate?.Value,
-                CreatedByName = company.CreateDate is not null ? company.CreatedBy?.Name : "",
+                CreatedByName = createdBy is not null ? createdBy?.Name : "",
                 ModifiedDate = company.ModifiedDate?.Value,
-                ModifiedBy = company.ModifiedBy is not null ? company.ModifiedBy?.Name : "",
+                ModifiedBy = modifiedBy is not null ? modifiedBy?.Name : "",
             };
         }
     }
