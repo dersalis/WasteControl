@@ -11,6 +11,16 @@ namespace WasteControl.Core.Entities
         public TimeStamp? ModifiedDate { get; protected set; }
         public ID? ModifiedById { get; protected set; }
 
+        public BaseEntity(TimeStamp? createDate, ID? createdById, TimeStamp? modifiedDate, ID? modifiedById)
+        {
+            Id = Guid.NewGuid();
+            IsActive = true;
+            CreateDate = createDate;
+            CreatedById = createdById;
+            ModifiedDate = modifiedDate;
+            ModifiedById = modifiedById;
+        }
+
         public void ChangeActivity(bool isActive)
         {
             IsActive = new Activity(isActive);

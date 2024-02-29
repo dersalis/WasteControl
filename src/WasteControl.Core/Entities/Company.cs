@@ -14,8 +14,8 @@ namespace WasteControl.Core.Entities
         public Email Email { get; private set; }
 
         public Company(CompanyCode code, CompanyName name, Address address, City city, PostalCode postalCode, Country country, Phone phone, Email email)
+            : base(null, null, null, null)
         {
-            Id = Guid.NewGuid();
             Code = code;
             Name = name;
             Address = address;
@@ -24,7 +24,6 @@ namespace WasteControl.Core.Entities
             Country = country;
             Phone = phone;
             Email = email;
-            IsActive = true;
         }
 
         public void ChangeCompanyCode(string code)

@@ -14,30 +14,28 @@ namespace WasteControl.Core.Entities
 
         private readonly HashSet<Waste> _wastes = new();
 
-        public WasteExport()
+        public WasteExport() : base(null, null, null, null)
         {
-            Id = Guid.NewGuid();
+            
         }
 
         public WasteExport(ReceivingCompany receivingCompany, TransportCompany transportCompany, TimeStamp bookingDate, 
             WasteExportDescription description, WasteExportStatus status)
+            : base(null, null, null, null)
         {
-            Id = Guid.NewGuid();
             ReceivingCompanyId = receivingCompany.Id;
             TransportCompanyId = transportCompany.Id;
             BookingDate = bookingDate;
             Description = description;
             Status = status;
-            IsActive = true;
         }
 
         public WasteExport(TimeStamp bookingDate, WasteExportDescription description, WasteExportStatus status)
+            : base(null, null, null, null)
         {
-            Id = Guid.NewGuid();
             BookingDate = bookingDate;
             Description = description;
             Status = status;
-            IsActive = true;
         }
 
         public void AddReceivingCompany(ReceivingCompany receivingCompany)

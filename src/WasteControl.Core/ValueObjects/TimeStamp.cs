@@ -16,8 +16,11 @@ namespace WasteControl.Core.ValueObjects
             Value = value;
         }
 
-        public static implicit operator DateTime(TimeStamp timeStamp) => timeStamp.Value;
-        public static implicit operator TimeStamp(DateTime timeStamp) => new TimeStamp(timeStamp);
+        public static implicit operator DateTime(TimeStamp timeStamp) 
+            => timeStamp.Value;
+
+        public static implicit operator TimeStamp(DateTime timeStamp) 
+            => new TimeStamp(timeStamp);
 
         public static bool operator >(TimeStamp left, TimeStamp right) => left.Value > right.Value;
         public static bool operator <(TimeStamp left, TimeStamp right) => left.Value < right.Value;

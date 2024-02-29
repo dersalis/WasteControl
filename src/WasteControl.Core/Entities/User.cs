@@ -7,17 +7,15 @@ namespace WasteControl.Core.Entities
         public UserName Name { get; set; }        
         public Email Email { get; set; }
 
-        public User()
-        {
-            Id = Guid.NewGuid();
-        }
+        // public User() : base(null, null, null, null)
+        // {
+        // }
 
         public User(UserName name, Email email)
+            : base(null, null, null, null)
         {
-            Id = Guid.NewGuid();
             Name = name;
             Email = email;
-            IsActive = true;
         }
     }
 }

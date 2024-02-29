@@ -1,0 +1,3 @@
+Migracje robimy w katalogu głównym projektu:
+
+dotnet ef migrations add Init -o ./DAL/Migrations -p src/WasteControl.Infrastructure -s src/WasteControl.Api -c WasteControlDbContext --verbose

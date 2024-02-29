@@ -19,29 +19,29 @@ namespace WasteControl.Infrastructure.DAL.Configurations
                 .HasConversion(
                     v => v.Value,
                     v => new Activity(v));
-            
+
             builder.Property(x => x.CreateDate)
-                .HasConversion<TimeStamp?>(
-                    v => v == null ? null : v.Value,
-                    v => v == null ? null : new TimeStamp(v))
+                .HasConversion(
+                    v => v.Value,
+                    v => new TimeStamp(v))
                 .IsRequired(false);
 
             builder.Property(x => x.CreatedById)
-                .HasConversion<ID?>(
-                    v => v == null ? null : v.Value,
-                    v => v == null ? null : new ID(v))
+                .HasConversion(
+                    v => v.Value,
+                    v => new ID(v))
                 .IsRequired(false);
 
             builder.Property(x => x.ModifiedDate)
-                .HasConversion<TimeStamp?>(
-                    v => v == null ? null : v.Value,
-                    v => v == null ? null : new TimeStamp(v))
+                .HasConversion(
+                    v => v.Value,
+                    v => new TimeStamp(v))
                 .IsRequired(false);
 
             builder.Property(x => x.ModifiedById)
-                .HasConversion<ID?>(
-                    v => v == null ? null : v.Value,
-                    v => v == null ? null : new ID(v))
+                .HasConversion(
+                    v => v.Value,
+                    v => new ID(v))
                 .IsRequired(false);
 
             builder.Property(x => x.Code)

@@ -21,45 +21,50 @@ namespace WasteControl.Infrastructure.DAL.Configurations
                     v => new Activity(v));
             
             builder.Property(x => x.CreateDate)
-                .HasConversion<TimeStamp?>(
-                    v => v == null ? null : v.Value,
-                    v => v == null ? null : new TimeStamp(v))
+                .HasConversion(
+                    v => v.Value,
+                    v => new TimeStamp(v))
                 .IsRequired(false);
 
             builder.Property(x => x.CreatedById)
-                .HasConversion<ID?>(
-                    v => v == null ? null : v.Value,
-                    v => v == null ? null : new ID(v))
+                .HasConversion(
+                    v => v.Value,
+                    v => new ID(v))
                 .IsRequired(false);
 
             builder.Property(x => x.ModifiedDate)
-                .HasConversion<TimeStamp?>(
-                    v => v == null ? null : v.Value,
-                    v => v == null ? null : new TimeStamp(v))
+                .HasConversion(
+                    v => v.Value,
+                    v => new TimeStamp(v))
                 .IsRequired(false);
 
             builder.Property(x => x.ModifiedById)
-                .HasConversion<ID?>(
-                    v => v == null ? null : v.Value,
-                    v => v == null ? null : new ID(v))
+                .HasConversion(
+                    v => v.Value,
+                    v => new ID(v))
                 .IsRequired(false);
 
             builder.Property(x => x.ReceivingCompanyId)
-                .HasConversion<ID?>(
-                    v => v == null ? null : v.Value,
-                    v => v == null ? null : new ID(v))
+                .HasConversion(
+                    v => v.Value,
+                    v => new ID(v))
                 .IsRequired(false);
 
             builder.Property(x => x.TransportCompanyId)
-                .HasConversion<ID?>(
-                    v => v == null ? null : v.Value,
-                    v => v == null ? null : new ID(v))
+                .HasConversion(
+                    v => v.Value,
+                    v => new ID(v))
                 .IsRequired(false);
 
             builder.Property(x => x.BookingDate)
                 .HasConversion(
                     v => v.Value,
                     v => new TimeStamp(v));
+
+            builder.Property(x => x.Description)
+                .HasConversion(
+                    v => v.Value,
+                    v => new WasteExportDescription(v));
         }
     }
 }
