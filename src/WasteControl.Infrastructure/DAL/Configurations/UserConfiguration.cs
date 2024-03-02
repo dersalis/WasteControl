@@ -26,6 +26,11 @@ namespace WasteControl.Infrastructure.DAL.Configurations
                     v => new TimeStamp(v))
                 .IsRequired(false);
 
+            builder.HasOne(x => x.CreatedBy)
+                .WithMany()
+                .HasForeignKey(x => x.CreatedById)
+                .IsRequired(false);
+
             builder.Property(x => x.CreatedById)
                 .HasConversion(
                     v => v.Value,
@@ -36,6 +41,11 @@ namespace WasteControl.Infrastructure.DAL.Configurations
                 .HasConversion(
                     v => v.Value,
                     v => new TimeStamp(v))
+                .IsRequired(false);
+
+            builder.HasOne(x => x.ModifiedBy)
+                .WithMany()
+                .HasForeignKey(x => x.ModifiedById)
                 .IsRequired(false);
 
             builder.Property(x => x.ModifiedById)
@@ -54,6 +64,55 @@ namespace WasteControl.Infrastructure.DAL.Configurations
                     v => v.Value,
                     v => new Email(v));
                 
+            builder.HasMany<WasteExport>()
+                .WithOne(x => x.CreatedBy)
+                .HasForeignKey(x => x.CreatedById)
+                .IsRequired(false);
+
+            builder.HasMany<WasteExport>()
+                .WithOne(x => x.ModifiedBy)
+                .HasForeignKey(x => x.ModifiedById)
+                .IsRequired(false);
+
+            builder.HasMany<Waste>()
+                .WithOne(x => x.CreatedBy)
+                .HasForeignKey(x => x.CreatedById)
+                .IsRequired(false);
+
+            builder.HasMany<Waste>()
+                .WithOne(x => x.ModifiedBy)
+                .HasForeignKey(x => x.ModifiedById)
+                .IsRequired(false);
+
+            builder.HasMany<ReceivingCompany>()
+                .WithOne(x => x.CreatedBy)
+                .HasForeignKey(x => x.CreatedById)
+                .IsRequired(false);
+
+            builder.HasMany<ReceivingCompany>()
+                .WithOne(x => x.ModifiedBy)
+                .HasForeignKey(x => x.ModifiedById)
+                .IsRequired(false);
+
+            builder.HasMany<TransportCompany>()
+                .WithOne(x => x.CreatedBy)
+                .HasForeignKey(x => x.CreatedById)
+                .IsRequired(false);
+
+            builder.HasMany<TransportCompany>()
+                .WithOne(x => x.ModifiedBy)
+                .HasForeignKey(x => x.ModifiedById)
+                .IsRequired(false);
+
+            builder.HasMany<User>()
+                .WithOne(x => x.CreatedBy)
+                .HasForeignKey(x => x.CreatedById)
+                .IsRequired(false);
+
+            builder.HasMany<User>()
+                .WithOne(x => x.ModifiedBy)
+                .HasForeignKey(x => x.ModifiedById)
+                .IsRequired(false);
         }
     }
 }

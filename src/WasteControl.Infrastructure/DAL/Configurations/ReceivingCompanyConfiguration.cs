@@ -19,11 +19,16 @@ namespace WasteControl.Infrastructure.DAL.Configurations
                 .HasConversion(
                     v => v.Value,
                     v => new Activity(v));
-
+            
             builder.Property(x => x.CreateDate)
                 .HasConversion(
                     v => v.Value,
                     v => new TimeStamp(v))
+                .IsRequired(false);
+
+            builder.HasOne(x => x.CreatedBy)
+                .WithMany()
+                .HasForeignKey(x => x.CreatedById)
                 .IsRequired(false);
 
             builder.Property(x => x.CreatedById)
@@ -36,6 +41,11 @@ namespace WasteControl.Infrastructure.DAL.Configurations
                 .HasConversion(
                     v => v.Value,
                     v => new TimeStamp(v))
+                .IsRequired(false);
+
+            builder.HasOne(x => x.ModifiedBy)
+                .WithMany()
+                .HasForeignKey(x => x.ModifiedById)
                 .IsRequired(false);
 
             builder.Property(x => x.ModifiedById)
@@ -83,6 +93,11 @@ namespace WasteControl.Infrastructure.DAL.Configurations
                 .HasConversion(
                     v => v.Value,
                     v => new Email(v));
+
+            builder.HasMany<WasteExport>()
+                .WithOne(x => x.ReceivingCompany)
+                .HasForeignKey(x => x.ReceivingCompanyId)
+                .IsRequired(false);
         }
 
     }

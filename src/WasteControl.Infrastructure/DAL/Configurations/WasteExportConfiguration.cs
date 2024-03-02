@@ -26,6 +26,11 @@ namespace WasteControl.Infrastructure.DAL.Configurations
                     v => new TimeStamp(v))
                 .IsRequired(false);
 
+            builder.HasOne(x => x.CreatedBy)
+                .WithMany()
+                .HasForeignKey(x => x.CreatedById)
+                .IsRequired(false);
+
             builder.Property(x => x.CreatedById)
                 .HasConversion(
                     v => v.Value,
@@ -38,16 +43,31 @@ namespace WasteControl.Infrastructure.DAL.Configurations
                     v => new TimeStamp(v))
                 .IsRequired(false);
 
+            builder.HasOne(x => x.ModifiedBy)
+                .WithMany()
+                .HasForeignKey(x => x.ModifiedById)
+                .IsRequired(false);
+
             builder.Property(x => x.ModifiedById)
                 .HasConversion(
                     v => v.Value,
                     v => new ID(v))
                 .IsRequired(false);
 
+            builder.HasOne(x => x.ReceivingCompany)
+                .WithMany()
+                .HasForeignKey(x => x.ReceivingCompanyId)
+                .IsRequired(false);
+
             builder.Property(x => x.ReceivingCompanyId)
                 .HasConversion(
                     v => v.Value,
                     v => new ID(v))
+                .IsRequired(false);
+
+            builder.HasOne(x => x.TransportCompany)
+                .WithMany()
+                .HasForeignKey(x => x.TransportCompanyId)
                 .IsRequired(false);
 
             builder.Property(x => x.TransportCompanyId)

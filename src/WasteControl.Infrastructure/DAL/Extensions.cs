@@ -21,6 +21,8 @@ namespace WasteControl.Infrastructure.DAL
             services.AddScoped<IRepository<WasteExport>, InMemoryWasteExportRepository>();
             services.AddScoped<IRepository<User>, InMemoryUserRepository>();
 
+            services.AddHostedService<DatabaseInitializer>();
+
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             
             return services;

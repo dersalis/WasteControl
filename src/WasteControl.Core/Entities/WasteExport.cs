@@ -5,7 +5,9 @@ namespace WasteControl.Core.Entities
 {
     public class WasteExport : BaseEntity
     {
+        public ReceivingCompany? ReceivingCompany { get; private set; }
         public ID? ReceivingCompanyId { get; private set; }
+        public TransportCompany? TransportCompany { get; private set; }
         public ID? TransportCompanyId { get; private set; }
         public TimeStamp BookingDate { get; private set; }
         public WasteExportDescription Description { get; private set; }

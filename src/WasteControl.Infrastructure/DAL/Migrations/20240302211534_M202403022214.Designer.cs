@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WasteControl.Infrastructure.DAL;
@@ -11,9 +12,11 @@ using WasteControl.Infrastructure.DAL;
 namespace WasteControl.Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(WasteControlDbContext))]
-    partial class WasteControlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240302211534_M202403022214")]
+    partial class M202403022214
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

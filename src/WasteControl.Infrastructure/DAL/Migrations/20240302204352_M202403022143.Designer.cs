@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WasteControl.Infrastructure.DAL;
@@ -11,9 +12,11 @@ using WasteControl.Infrastructure.DAL;
 namespace WasteControl.Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(WasteControlDbContext))]
-    partial class WasteControlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240302204352_M202403022143")]
+    partial class M202403022143
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,10 +79,6 @@ namespace WasteControl.Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("ModifiedById");
-
                     b.ToTable("ReceivingCompanies");
                 });
 
@@ -137,10 +136,6 @@ namespace WasteControl.Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("ModifiedById");
-
                     b.ToTable("TransportCompanies");
                 });
 
@@ -173,10 +168,6 @@ namespace WasteControl.Infrastructure.DAL.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("ModifiedById");
 
                     b.ToTable("Users");
                 });
@@ -221,10 +212,6 @@ namespace WasteControl.Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("ModifiedById");
-
                     b.HasIndex("WasteExportId");
 
                     b.ToTable("Wastes");
@@ -268,104 +255,23 @@ namespace WasteControl.Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("ModifiedById");
-
-                    b.HasIndex("ReceivingCompanyId");
-
                     b.HasIndex("TransportCompanyId");
 
                     b.ToTable("WasteExports");
                 });
 
-            modelBuilder.Entity("WasteControl.Core.Entities.ReceivingCompany", b =>
-                {
-                    b.HasOne("WasteControl.Core.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("WasteControl.Core.Entities.User", "ModifiedBy")
-                        .WithMany()
-                        .HasForeignKey("ModifiedById");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("ModifiedBy");
-                });
-
-            modelBuilder.Entity("WasteControl.Core.Entities.TransportCompany", b =>
-                {
-                    b.HasOne("WasteControl.Core.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("WasteControl.Core.Entities.User", "ModifiedBy")
-                        .WithMany()
-                        .HasForeignKey("ModifiedById");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("ModifiedBy");
-                });
-
-            modelBuilder.Entity("WasteControl.Core.Entities.User", b =>
-                {
-                    b.HasOne("WasteControl.Core.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("WasteControl.Core.Entities.User", "ModifiedBy")
-                        .WithMany()
-                        .HasForeignKey("ModifiedById");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("ModifiedBy");
-                });
-
             modelBuilder.Entity("WasteControl.Core.Entities.Waste", b =>
                 {
-                    b.HasOne("WasteControl.Core.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("WasteControl.Core.Entities.User", "ModifiedBy")
-                        .WithMany()
-                        .HasForeignKey("ModifiedById");
-
                     b.HasOne("WasteControl.Core.Entities.WasteExport", null)
                         .WithMany("Wastes")
                         .HasForeignKey("WasteExportId");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("ModifiedBy");
                 });
 
             modelBuilder.Entity("WasteControl.Core.Entities.WasteExport", b =>
                 {
-                    b.HasOne("WasteControl.Core.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("WasteControl.Core.Entities.User", "ModifiedBy")
-                        .WithMany()
-                        .HasForeignKey("ModifiedById");
-
-                    b.HasOne("WasteControl.Core.Entities.ReceivingCompany", "ReceivingCompany")
-                        .WithMany()
-                        .HasForeignKey("ReceivingCompanyId");
-
                     b.HasOne("WasteControl.Core.Entities.TransportCompany", "TransportCompany")
                         .WithMany()
                         .HasForeignKey("TransportCompanyId");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("ModifiedBy");
-
-                    b.Navigation("ReceivingCompany");
 
                     b.Navigation("TransportCompany");
                 });
