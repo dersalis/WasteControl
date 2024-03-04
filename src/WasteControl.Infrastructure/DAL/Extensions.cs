@@ -18,11 +18,14 @@ namespace WasteControl.Infrastructure.DAL
 
             services.AddScoped<IRepository<Waste>, InMemoryWasteRepository>();
             // services.AddScoped<IRepository<ReceivingCompany>, InMemoryReceivingCompanyRepository>();
-            services.AddScoped<IRepository<TransportCompany>, InMemoryTransportCompanyRepository>();
-            services.AddScoped<IRepository<WasteExport>, InMemoryWasteExportRepository>();
+            // services.AddScoped<IRepository<TransportCompany>, InMemoryTransportCompanyRepository>();
+            // services.AddScoped<IRepository<WasteExport>, InMemoryWasteExportRepository>();
             // services.AddScoped<IRepository<User>, InMemoryUserRepository>();
 
             services.AddScoped<IRepository<ReceivingCompany>, PostgresReceivingCompanyRepository>();
+            services.AddScoped<IRepository<TransportCompany>, PostgresTransportCompanyRepository>();
+            services.AddScoped<IRepository<Waste>, PostgresWasteRepository>();
+            services.AddScoped<IRepository<WasteExport>, PostgresWasteExportRepository>();
             services.AddScoped<IRepository<User>, PostgresUserRepository>();
 
             services.AddHostedService<DatabaseInitializer>();

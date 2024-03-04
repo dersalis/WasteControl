@@ -1,5 +1,5 @@
 @url = http://localhost:5012
-@selectedExport = 11234d72-a625-4cb2-b1c4-fb7c7c9b4f63
+@selectedExport = 0a457cb0-b994-4bda-b6f7-bc743ef68a3f
 ###
 GET {{url}}/waste-export
 Accept: application/json
@@ -30,9 +30,9 @@ Content-Type: application/json
 
 {
   "id": "{{selectedExport}}",
-  "receivingCompanyOid": "32b09be0-1e44-44f6-b78f-17c9477aadd7",
-  "transportCompanyOid": "1351b586-fa56-4d65-95cd-5092d7121e67",
-  "bookingDate": "2024-02-26",
+  "receivingCompanyOid": "7a58ec91-83d5-4e13-aabc-b4b1bebe2470",
+  "transportCompanyOid": "1415e8f1-435a-49ed-915a-9042177f8851",
+  "bookingDate": "2024-03-26",
   "description": "Test 2029"
 }
 
@@ -46,10 +46,10 @@ PUT {{url}}/waste-export/{{selectedExport}}/add-wastes
 Content-Type: application/json
 
 {
-  "wasteExportId": "11234d72-a625-4cb2-b1c4-fb7c7c9b4f63",
+  "wasteExportId": "{{selectedExport}}",
   "wastes": [
-    "d3d8da49-aa30-49a5-ac36-27ddac1ff8ec",
-    "09805973-af71-4619-8dd4-81dd71f663ef"
+    "fe30273d-fa63-4b09-a5c5-41f24f30128f",
+    "fad11c2e-c4c8-436a-81c5-af2b35cd35b1"
   ]
 }
 

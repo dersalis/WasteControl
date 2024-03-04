@@ -27,7 +27,7 @@ namespace WasteControl.Application.Queries.WasteExports.GetWasteExportById
                 ReceivingCompanyName = wasteExport.ReceivingCompany is not null ? 
                     $"[{wasteExport.ReceivingCompany?.Code}] {wasteExport.ReceivingCompany?.Name}" : "",
                 TransportCompanyName = wasteExport.TransportCompany is not null ? 
-                    $"[{wasteExport.ReceivingCompany?.Code}] {wasteExport.ReceivingCompany?.Name}" : "",
+                    $"[{wasteExport.TransportCompany?.Code}] {wasteExport.TransportCompany?.Name}" : "",
                 BookingDate = wasteExport.BookingDate,
                 Description = wasteExport.Description,
                 Status = wasteExport.Status,
