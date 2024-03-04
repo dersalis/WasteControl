@@ -8,25 +8,17 @@ namespace WasteControl.Application.Queries.ReceivingCompanies.GetReceivingCompan
     internal sealed class GetReceivingCompaniesQueryHandler : IRequestHandler<GetReceivingCompaniesQuery, IEnumerable<CompanyDto>>
     {
         private readonly IRepository<ReceivingCompany> _companyRepository;
-        private readonly IRepository<User> _userRepository;
 
-        public GetReceivingCompaniesQueryHandler(IRepository<ReceivingCompany> companyRepository, IRepository<User> userRepository)
+        public GetReceivingCompaniesQueryHandler(IRepository<ReceivingCompany> companyRepository)
         {
             _companyRepository = companyRepository;
-            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<CompanyDto>> Handle(GetReceivingCompaniesQuery request, CancellationToken cancellationToken)
         {
             var companies = await _companyRepository.GetAllAsync();
-            var users = await _userRepository.GetAllAsync();
 
-            return companies.Select(c => 
-            {
-                var createdBy = users.FirstOrDefault(u => u.Id == c.CreatedById);
-                var modifiedBy = users.FirstOrDefault(u => u.Id == c.ModifiedById);
-
-                return new CompanyDto
+            return companies.Select(c => new CompanyDto
                 {
                     Id = c.Id,
                     Code = c.Code.Value,
@@ -39,11 +31,10 @@ namespace WasteControl.Application.Queries.ReceivingCompanies.GetReceivingCompan
                     Email = c.Email.Value,
                     IsActive = c.IsActive,
                     CreateDate = c.CreateDate?.Value,
-                    CreatedByName = createdBy is not null ? createdBy?.Name : "",
+                    CreatedByName = c.CreatedBy is not null ? c.CreatedBy?.Name : "",
                     ModifiedDate = c.ModifiedDate?.Value,
-                    ModifiedBy = modifiedBy is not null ? modifiedBy?.Name : "",
-                };
-            });
+                    ModifiedBy = c.ModifiedBy is not null ? c.ModifiedBy?.Name : "",
+                });
         }
         
     }

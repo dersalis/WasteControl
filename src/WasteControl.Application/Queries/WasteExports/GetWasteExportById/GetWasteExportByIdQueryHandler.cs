@@ -8,16 +8,10 @@ namespace WasteControl.Application.Queries.WasteExports.GetWasteExportById
     internal sealed class GetWasteExportByIdQueryHandler : IRequestHandler<GetWasteExportByIdQuery, WasteExportDto>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
-        private readonly IRepository<User> _userRepository;
-        private readonly IRepository<ReceivingCompany> _receivingCompanyRepository;
-        private readonly IRepository<TransportCompany> _transportCompanyRepository;
 
-        public GetWasteExportByIdQueryHandler(IRepository<WasteExport> wasteExportRepository, IRepository<User> userRepository, IRepository<ReceivingCompany> receivingCompanyRepository, IRepository<TransportCompany> transportCompanyRepository)
+        public GetWasteExportByIdQueryHandler(IRepository<WasteExport> wasteExportRepository)
         {
             _wasteExportRepository = wasteExportRepository;
-            _userRepository = userRepository;
-            _receivingCompanyRepository = receivingCompanyRepository;
-            _transportCompanyRepository = transportCompanyRepository;
         }
 
         public async Task<WasteExportDto> Handle(GetWasteExportByIdQuery request, CancellationToken cancellationToken)
@@ -27,26 +21,21 @@ namespace WasteControl.Application.Queries.WasteExports.GetWasteExportById
             if (wasteExport is null)
                 return default;
 
-            var createdBy = await _userRepository.GetAsync(wasteExport.CreatedById);
-            var modifiedBy = await _userRepository.GetAsync(wasteExport.ModifiedById);
-            var receivingCompany = await _receivingCompanyRepository.GetAsync(wasteExport.ReceivingCompanyId);
-            var transportCompany = await _transportCompanyRepository.GetAsync(wasteExport.TransportCompanyId);
-
             return new WasteExportDto
             {
                 Id = wasteExport.Id,
-                ReceivingCompanyName = wasteExport.ReceivingCompanyId is not null ? 
-                    $"[{receivingCompany?.Code}] {receivingCompany?.Name}" : "",
-                TransportCompanyName = wasteExport.TransportCompanyId is not null ? 
-                    $"[{transportCompany?.Code}] {transportCompany?.Name}" : "",
+                ReceivingCompanyName = wasteExport.ReceivingCompany is not null ? 
+                    $"[{wasteExport.ReceivingCompany?.Code}] {wasteExport.ReceivingCompany?.Name}" : "",
+                TransportCompanyName = wasteExport.TransportCompany is not null ? 
+                    $"[{wasteExport.ReceivingCompany?.Code}] {wasteExport.ReceivingCompany?.Name}" : "",
                 BookingDate = wasteExport.BookingDate,
                 Description = wasteExport.Description,
                 Status = wasteExport.Status,
                 IsActive = wasteExport.IsActive,
                 CreateDate = wasteExport.CreateDate?.Value,
-                CreatedByName = createdBy is not null ? createdBy?.Name : "",
+                CreatedByName = wasteExport.CreatedBy is not null ? wasteExport.CreatedBy?.Name : "",
                 ModifiedDate = wasteExport.ModifiedDate?.Value,
-                ModifiedBy = modifiedBy is not null ? modifiedBy?.Name : "",
+                ModifiedBy = wasteExport.ModifiedBy is not null ? wasteExport.ModifiedBy?.Name : "",
             };
         }
     }

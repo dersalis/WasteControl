@@ -8,33 +8,17 @@ namespace WasteControl.Application.Queries.WasteExports.GetWasteExports
     internal sealed class GetWasteExportsQueryHandler : IRequestHandler<GetWasteExportsQuery, IEnumerable<WasteExportDto>>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
-        private readonly IRepository<User> _userRepository;
-        private readonly IRepository<ReceivingCompany> _receivingCompanyRepository;
-        private readonly IRepository<TransportCompany> _transportCompanyRepository;
 
-        public GetWasteExportsQueryHandler(IRepository<WasteExport> wasteExportRepository, IRepository<ReceivingCompany> receivingCompanyRepository, IRepository<TransportCompany> transportCompanyRepository, IRepository<User> userRepository)
+        public GetWasteExportsQueryHandler(IRepository<WasteExport> wasteExportRepository)
         {
             _wasteExportRepository = wasteExportRepository;
-            _receivingCompanyRepository = receivingCompanyRepository;
-            _transportCompanyRepository = transportCompanyRepository;
-            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<WasteExportDto>> Handle(GetWasteExportsQuery request, CancellationToken cancellationToken)
         {
             var wasteExports = await _wasteExportRepository.GetAllAsync();
-            // var users = await _userRepository.GetAllAsync();
-            // var receivingCompanies = await _receivingCompanyRepository.GetAllAsync();
-            // var transportCompanies = await _transportCompanyRepository.GetAllAsync();
 
-            return wasteExports.Select(w =>
-            {
-                // var createdBy = users.FirstOrDefault(u => u.Id == w.CreatedById);
-                // var modifiedBy = users.FirstOrDefault(u => u.Id == w.ModifiedById);
-                // var receivingCompany = receivingCompanies.FirstOrDefault(r => r.Id == w.ReceivingCompanyId);
-                // var transportCompany = transportCompanies.FirstOrDefault(t => t.Id == w.TransportCompanyId);
-
-                return new WasteExportDto
+            return wasteExports.Select(w => new WasteExportDto
                 {
                     Id = w.Id,
                     ReceivingCompanyName = w.ReceivingCompany is not null ? 
@@ -51,8 +35,7 @@ namespace WasteControl.Application.Queries.WasteExports.GetWasteExports
                     ModifiedDate = w.ModifiedDate?.Value,
                     // ModifiedBy = modifiedBy is not null ? modifiedBy?.Name : "",
                     ModifiedBy = w.ModifiedBy is not null ? w.ModifiedBy?.Name : "",
-                };
-            });
+                });
         }
     }
 }

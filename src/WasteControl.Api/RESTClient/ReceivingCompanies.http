@@ -1,5 +1,5 @@
 @url = http://localhost:5012
-@selected = 864981ea-9486-4107-bfd8-dc34b26adf43
+@selected = 783071b1-4e7e-4843-9b1a-a47e40be9cfe
 
 ###
 GET {{url}}/receiving-companies
@@ -25,11 +25,11 @@ Content-Type: application/json
 }
 
 ###
-PUT {{url}}/receiving-companies/e2fd3f43-c49d-4750-b996-f63c1c917846
+PUT {{url}}/receiving-companies/{{selected}}
 Content-Type: application/json
 
 {
-    "id": "e2fd3f43-c49d-4750-b996-f63c1c917846",
+    "id": "783071b1-4e7e-4843-9b1a-a47e40be9cfe",
     "code": "CODE-9935",
     "name": "Farrell, Bartell and O'Reilly",
     "address": "799 Marina Street",
@@ -41,5 +41,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE  {{url}}/receiving-companies/e2fd3f43-c49d-4750-b996-f63c1c917846
+DELETE  {{url}}/receiving-companies/{{selected}}
 Accept: application/json

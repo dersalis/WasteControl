@@ -23,8 +23,6 @@ namespace WasteControl.Application.Queries.Wastes.GetWastes
 
             return wastes.Select(w => 
             {
-                var createdBy = users.FirstOrDefault(u => u.Id == w.CreatedById);
-                var modifiedBy = users.FirstOrDefault(u => u.Id == w.ModifiedById);
 
                 return new WasteDto
                 {
@@ -35,9 +33,9 @@ namespace WasteControl.Application.Queries.Wastes.GetWastes
                     Unit = w.Unit.Value,
                     IsActive = w.IsActive,
                     CreateDate = w.CreateDate?.Value,
-                    CreatedByName = createdBy is not null ? createdBy?.Name : "",
+                    CreatedByName = w.CreatedBy is not null ? w.CreatedBy?.Name : "",
                     ModifiedDate = w.ModifiedDate?.Value,
-                    ModifiedBy = modifiedBy is not null ? modifiedBy?.Name : "",
+                    ModifiedBy = w.ModifiedBy is not null ? w.ModifiedBy?.Name : "",
                 };
             });
         }

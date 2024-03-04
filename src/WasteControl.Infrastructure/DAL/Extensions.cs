@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WasteControl.Core.Entities;
 using WasteControl.Infrastructure.Abstractions;
 using WasteControl.Infrastructure.DAL.Repositories.InMemory;
+using WasteControl.Infrastructure.DAL.Repositories.Postgres;
 
 namespace WasteControl.Infrastructure.DAL
 {
@@ -16,10 +17,13 @@ namespace WasteControl.Infrastructure.DAL
             services.AddDbContext<WasteControlDbContext>(options => options.UseNpgsql(dbOptions.PostgresConnection));
 
             services.AddScoped<IRepository<Waste>, InMemoryWasteRepository>();
-            services.AddScoped<IRepository<ReceivingCompany>, InMemoryReceivingCompanyRepository>();
+            // services.AddScoped<IRepository<ReceivingCompany>, InMemoryReceivingCompanyRepository>();
             services.AddScoped<IRepository<TransportCompany>, InMemoryTransportCompanyRepository>();
             services.AddScoped<IRepository<WasteExport>, InMemoryWasteExportRepository>();
-            services.AddScoped<IRepository<User>, InMemoryUserRepository>();
+            // services.AddScoped<IRepository<User>, InMemoryUserRepository>();
+
+            services.AddScoped<IRepository<ReceivingCompany>, PostgresReceivingCompanyRepository>();
+            services.AddScoped<IRepository<User>, PostgresUserRepository>();
 
             services.AddHostedService<DatabaseInitializer>();
 

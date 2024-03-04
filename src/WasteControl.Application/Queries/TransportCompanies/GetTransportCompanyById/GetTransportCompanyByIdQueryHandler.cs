@@ -8,12 +8,10 @@ namespace WasteControl.Application.Queries.TransportCompanies.GetTransportCompan
     internal sealed class GetTransportCompanyByIdQueryHandler : IRequestHandler<GetTransportCompanyByIdQuery, CompanyDto>
     {
         private readonly IRepository<TransportCompany> _companyRepository;
-        private readonly IRepository<User> _userRepository;
 
-        public GetTransportCompanyByIdQueryHandler(IRepository<TransportCompany> companyRepository, IRepository<User> userRepository)
+        public GetTransportCompanyByIdQueryHandler(IRepository<TransportCompany> companyRepository)
         {
             _companyRepository = companyRepository;
-            _userRepository = userRepository;
         }
 
         public async Task<CompanyDto> Handle(GetTransportCompanyByIdQuery request, CancellationToken cancellationToken)
@@ -23,8 +21,6 @@ namespace WasteControl.Application.Queries.TransportCompanies.GetTransportCompan
             if (company is null)
                 return default;
 
-            var createdBy = await _userRepository.GetAsync(company.CreatedById);
-            var modifiedBy = await _userRepository.GetAsync(company.ModifiedById);
 
             return new CompanyDto
             {
@@ -39,9 +35,9 @@ namespace WasteControl.Application.Queries.TransportCompanies.GetTransportCompan
                 Email = company.Email.Value,
                 IsActive = company.IsActive,
                 CreateDate = company.CreateDate?.Value,
-                CreatedByName = createdBy is not null ? createdBy?.Name : "",
+                CreatedByName = company.CreateDate is not null ? company.CreatedBy?.Name : "",
                 ModifiedDate = company.ModifiedDate?.Value,
-                ModifiedBy = modifiedBy is not null ? modifiedBy?.Name : "",
+                ModifiedBy = company.ModifiedBy is not null ? company.ModifiedBy?.Name : "",
             };
         }
     }
