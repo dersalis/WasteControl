@@ -23,32 +23,34 @@ namespace WasteControl.Application.Queries.WasteExports.GetWasteExports
         public async Task<IEnumerable<WasteExportDto>> Handle(GetWasteExportsQuery request, CancellationToken cancellationToken)
         {
             var wasteExports = await _wasteExportRepository.GetAllAsync();
-            var users = await _userRepository.GetAllAsync();
-            var receivingCompanies = await _receivingCompanyRepository.GetAllAsync();
-            var transportCompanies = await _transportCompanyRepository.GetAllAsync();
+            // var users = await _userRepository.GetAllAsync();
+            // var receivingCompanies = await _receivingCompanyRepository.GetAllAsync();
+            // var transportCompanies = await _transportCompanyRepository.GetAllAsync();
 
             return wasteExports.Select(w =>
             {
-                var createdBy = users.FirstOrDefault(u => u.Id == w.CreatedById);
-                var modifiedBy = users.FirstOrDefault(u => u.Id == w.ModifiedById);
-                var receivingCompany = receivingCompanies.FirstOrDefault(r => r.Id == w.ReceivingCompanyId);
-                var transportCompany = transportCompanies.FirstOrDefault(t => t.Id == w.TransportCompanyId);
+                // var createdBy = users.FirstOrDefault(u => u.Id == w.CreatedById);
+                // var modifiedBy = users.FirstOrDefault(u => u.Id == w.ModifiedById);
+                // var receivingCompany = receivingCompanies.FirstOrDefault(r => r.Id == w.ReceivingCompanyId);
+                // var transportCompany = transportCompanies.FirstOrDefault(t => t.Id == w.TransportCompanyId);
 
                 return new WasteExportDto
                 {
                     Id = w.Id,
-                    ReceivingCompanyName = w.ReceivingCompanyId is not null ? 
-                        $"[{receivingCompany?.Code}] {receivingCompany?.Name}" : "",
-                    TransportCompanyName = w.TransportCompanyId is not null ? 
-                        $"[{transportCompany?.Code}] {transportCompany?.Name}" : "",
+                    ReceivingCompanyName = w.ReceivingCompany is not null ? 
+                        $"[{w.ReceivingCompany?.Code}] {w.ReceivingCompany?.Name}" : "",
+                    TransportCompanyName = w.TransportCompany is not null ? 
+                        $"[{w.TransportCompany?.Code}] {w.TransportCompany?.Name}" : "",
                     BookingDate = w.BookingDate,
                     Description = w.Description,
                     Status = w.Status,
                     IsActive = w.IsActive,
                     CreateDate = w.CreateDate?.Value,
-                    CreatedByName = createdBy is not null ? createdBy?.Name : "",
+                    // CreatedByName = createdBy is not null ? createdBy?.Name : "",
+                    CreatedByName = w.CreatedBy is not null ? w.CreatedBy?.Name : "",
                     ModifiedDate = w.ModifiedDate?.Value,
-                    ModifiedBy = modifiedBy is not null ? modifiedBy?.Name : "",
+                    // ModifiedBy = modifiedBy is not null ? modifiedBy?.Name : "",
+                    ModifiedBy = w.ModifiedBy is not null ? w.ModifiedBy?.Name : "",
                 };
             });
         }

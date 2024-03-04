@@ -13,14 +13,14 @@ namespace WasteControl.Core.Entities
         public User? ModifiedBy { get; protected set; }
         public ID? ModifiedById { get; protected set; }
 
-        public BaseEntity(TimeStamp? createDate, ID? createdById, TimeStamp? modifiedDate, ID? modifiedById)
+        public BaseEntity(TimeStamp? createDate, User? createdBy, TimeStamp? modifiedDate, User? modifiedBy)
         {
             Id = Guid.NewGuid();
             IsActive = true;
             CreateDate = createDate;
-            CreatedById = createdById;
+            CreatedBy = createdBy;
             ModifiedDate = modifiedDate;
-            ModifiedById = modifiedById;
+            ModifiedBy = modifiedBy;
         }
 
         public void ChangeActivity(bool isActive)
@@ -35,7 +35,7 @@ namespace WasteControl.Core.Entities
 
         public void ChangeCreatedBy(User createdBy)
         {
-            CreatedById = createdBy.Id;
+            CreatedBy = createdBy;
         }
 
         public void ChangeModifiedDate(TimeStamp modifiedDate)
@@ -45,7 +45,7 @@ namespace WasteControl.Core.Entities
 
         public void ChangeModifiedBy(User modifiedBy)
         {
-            ModifiedById = modifiedBy.Id;
+            ModifiedBy = modifiedBy;
         }
     }
 }

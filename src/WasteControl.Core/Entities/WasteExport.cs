@@ -25,8 +25,8 @@ namespace WasteControl.Core.Entities
             WasteExportDescription description, WasteExportStatus status)
             : base(null, null, null, null)
         {
-            ReceivingCompanyId = receivingCompany.Id;
-            TransportCompanyId = transportCompany.Id;
+            ReceivingCompany = receivingCompany;
+            TransportCompany = transportCompany;
             BookingDate = bookingDate;
             Description = description;
             Status = status;
@@ -42,7 +42,7 @@ namespace WasteControl.Core.Entities
 
         public void AddReceivingCompany(ReceivingCompany receivingCompany)
         {
-            ReceivingCompanyId = receivingCompany.Id;
+            ReceivingCompany = receivingCompany;
         }
 
         public void DeleteReceivingCompany()
@@ -52,7 +52,7 @@ namespace WasteControl.Core.Entities
 
         public void AddTransportCompany(TransportCompany transportCompany)
         {
-            TransportCompanyId = transportCompany.Id;
+            TransportCompany = transportCompany;
         }
 
         public void DeleteTransportCompany()
