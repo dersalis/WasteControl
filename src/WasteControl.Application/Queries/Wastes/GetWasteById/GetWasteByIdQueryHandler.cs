@@ -1,5 +1,6 @@
 using MediatR;
 using WasteControl.Application.DTO;
+using WasteControl.Application.Mappers;
 using WasteControl.Core.Entities;
 using WasteControl.Infrastructure.Abstractions;
 
@@ -21,20 +22,7 @@ namespace WasteControl.Application.Queries.Wastes.GetWasteById
             if (waste is null)
                 return default;
 
-
-            return new WasteDto
-            {
-                Id = waste.Id,
-                Code = waste.Code.Value,
-                Name = waste.Name.Value,
-                Quantity = waste.Quantity.Value,
-                Unit = waste.Unit.Value,
-                IsActive = waste.IsActive,
-                CreateDate = waste.CreateDate?.Value,
-                CreatedByName = waste.CreatedBy is not null ? waste.CreatedBy?.Name : "",
-                ModifiedDate = waste.ModifiedDate?.Value,
-                ModifiedBy = waste.ModifiedBy is not null ? waste.ModifiedBy?.Name : "",
-            };
+            return waste.MapToDto();
         }
     }
 }

@@ -1,11 +1,12 @@
 @url = http://localhost:5012
+@selected = fe30273d-fa63-4b09-a5c5-41f24f30128f
 
 ###
 GET {{url}}/wastes
 Accept: application/json
 
 ###
-GET {{url}}/wastes/1322b562-2a05-4ac9-8709-8dd5ac1252fb
+GET {{url}}/wastes/{{selected}}
 Accept: application/json
 
 ###
@@ -21,7 +22,7 @@ Content-Type: application/json
 
 
 ###
-PUT {{url}}/wastes/ab3ef5ce-136b-46da-bb4e-f115bd8555d9
+PUT {{url}}/wastes/{{selected}}
 Content-Type: application/json
 
 {

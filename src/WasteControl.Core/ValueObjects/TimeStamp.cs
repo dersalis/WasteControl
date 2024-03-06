@@ -10,7 +10,7 @@ namespace WasteControl.Core.ValueObjects
         {
             if (value.Date < DateTime.Now.Date)
             {
-                throw new SmallerTimeStampException(value);
+                // throw new SmallerTimeStampException(value);
             }
 
             Value = value;

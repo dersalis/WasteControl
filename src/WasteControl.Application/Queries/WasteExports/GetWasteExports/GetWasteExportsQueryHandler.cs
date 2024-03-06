@@ -1,5 +1,6 @@
 using MediatR;
 using WasteControl.Application.DTO;
+using WasteControl.Application.Mappers;
 using WasteControl.Core.Entities;
 using WasteControl.Infrastructure.Abstractions;
 
@@ -18,24 +19,7 @@ namespace WasteControl.Application.Queries.WasteExports.GetWasteExports
         {
             var wasteExports = await _wasteExportRepository.GetAllAsync();
 
-            return wasteExports.Select(w => new WasteExportDto
-                {
-                    Id = w.Id,
-                    ReceivingCompanyName = w.ReceivingCompany is not null ? 
-                        $"[{w.ReceivingCompany?.Code}] {w.ReceivingCompany?.Name}" : "",
-                    TransportCompanyName = w.TransportCompany is not null ? 
-                        $"[{w.TransportCompany?.Code}] {w.TransportCompany?.Name}" : "",
-                    BookingDate = w.BookingDate,
-                    Description = w.Description,
-                    Status = w.Status,
-                    IsActive = w.IsActive,
-                    CreateDate = w.CreateDate?.Value,
-                    // CreatedByName = createdBy is not null ? createdBy?.Name : "",
-                    CreatedByName = w.CreatedBy is not null ? w.CreatedBy?.Name : "",
-                    ModifiedDate = w.ModifiedDate?.Value,
-                    // ModifiedBy = modifiedBy is not null ? modifiedBy?.Name : "",
-                    ModifiedBy = w.ModifiedBy is not null ? w.ModifiedBy?.Name : "",
-                });
+            return wasteExports.Select(w => w.MapToDto());
         }
     }
 }
