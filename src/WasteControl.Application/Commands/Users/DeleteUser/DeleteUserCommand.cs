@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MediatR;
 
 namespace WasteControl.Application.Commands.Users.DeleteUser
 {
-    public class DeleteUserCommand
+    public class DeleteUserCommand : IRequest
     {
-        
+        public Guid Id { get; set; }
     }
 }

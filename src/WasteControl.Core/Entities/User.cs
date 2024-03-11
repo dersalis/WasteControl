@@ -18,5 +18,30 @@ namespace WasteControl.Core.Entities
             Email = email;
             Password = password;
         }
+
+        public void ChangeName(string name)
+        {
+            Name = new UserName(name);
+        }
+
+        public void ChangeLogin(string login)
+        {
+            Login = new Login(login);
+        }
+
+        public void ChangeEmail(string email)
+        {
+            Email = new Email(email);
+        }
+
+        public void ChangePassword(string password)
+        {
+            Password = new Password(password);
+        }
+
+        public void ChangeRole(string role)
+        {
+            Role = new Role(role);
+        }
     }
 }
