@@ -8,10 +8,10 @@ namespace WasteControl.Application.Commands.WasteExports.AddTransporter
     internal sealed class AddTransporterCommandHandler : IRequestHandler<AddTransporterCommand>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
-        private readonly IRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IRepository<TransportCompany> _transportCompanyRepository;
 
-        public AddTransporterCommandHandler(IRepository<WasteExport> wasteExportRepository, IRepository<User> userRepository, IRepository<TransportCompany> transportCompanyRepository)
+        public AddTransporterCommandHandler(IRepository<WasteExport> wasteExportRepository, IUserRepository userRepository, IRepository<TransportCompany> transportCompanyRepository)
         {
             _wasteExportRepository = wasteExportRepository;
             _userRepository = userRepository;

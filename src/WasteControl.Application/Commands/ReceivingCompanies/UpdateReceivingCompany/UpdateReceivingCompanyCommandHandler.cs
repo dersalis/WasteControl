@@ -8,9 +8,9 @@ namespace WasteControl.Application.Commands.ReceivingCompanies.UpdateReceivingCo
     internal sealed class UpdateReceivingCompanyCommandHandler : IRequestHandler<UpdateReceivingCompanyCommand>
     {
         private readonly IRepository<ReceivingCompany> _receivingCompanyRepository;
-        private readonly IRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UpdateReceivingCompanyCommandHandler(IRepository<ReceivingCompany> receivingCompanyRepository, IRepository<User> userRepository)
+        public UpdateReceivingCompanyCommandHandler(IRepository<ReceivingCompany> receivingCompanyRepository, IUserRepository userRepository)
         {
             _receivingCompanyRepository = receivingCompanyRepository;
             _userRepository = userRepository;

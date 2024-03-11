@@ -8,9 +8,9 @@ namespace WasteControl.Application.Commands.TransportCompanies.CreateTransportCo
     internal sealed class CreateTransportCompanyCommandHandler : IRequestHandler<CreateTransportCompanyCommand, Guid>
     {
         public readonly IRepository<TransportCompany> _transportCompanyRepository;
-        public readonly IRepository<User> _userRepository;
+        public readonly IUserRepository _userRepository;
 
-        public CreateTransportCompanyCommandHandler(IRepository<TransportCompany> transportCompanyRepository, IRepository<User> userRepository)
+        public CreateTransportCompanyCommandHandler(IRepository<TransportCompany> transportCompanyRepository, IUserRepository userRepository)
         {
             _transportCompanyRepository = transportCompanyRepository;
             _userRepository = userRepository;

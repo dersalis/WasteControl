@@ -9,11 +9,11 @@ namespace WasteControl.Application.Commands.WasteExports.CreateWasteExport
     internal sealed class CreateWasteExportCommandHandler : IRequestHandler<CreateWasteExportCommand, Guid>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
-        private readonly IRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IRepository<ReceivingCompany> _receivingCompanyRepository;
         private readonly IRepository<TransportCompany> _transportCompanyRepository;
 
-        public CreateWasteExportCommandHandler(IRepository<WasteExport> wasteExportRepository, IRepository<User> userRepository, IRepository<ReceivingCompany> receivingCompanyRepository, IRepository<TransportCompany> transportCompanyRepository)
+        public CreateWasteExportCommandHandler(IRepository<WasteExport> wasteExportRepository, IUserRepository userRepository, IRepository<ReceivingCompany> receivingCompanyRepository, IRepository<TransportCompany> transportCompanyRepository)
         {
             _wasteExportRepository = wasteExportRepository;
             _userRepository = userRepository;

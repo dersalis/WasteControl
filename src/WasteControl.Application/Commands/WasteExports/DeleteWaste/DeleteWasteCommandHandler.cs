@@ -8,10 +8,10 @@ namespace WasteControl.Application.Commands.WasteExports.DeleteWaste
     internal sealed class DeleteWasteCommandHandler : IRequestHandler<DeleteWasteCommand>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
-        private readonly IRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IRepository<Waste> _wasteRepository;
 
-        public DeleteWasteCommandHandler(IRepository<WasteExport> wasteExportRepository, IRepository<User> userRepository, IRepository<Waste> wasteRepository)
+        public DeleteWasteCommandHandler(IRepository<WasteExport> wasteExportRepository, IUserRepository userRepository, IRepository<Waste> wasteRepository)
         {
             _wasteExportRepository = wasteExportRepository;
             _userRepository = userRepository;

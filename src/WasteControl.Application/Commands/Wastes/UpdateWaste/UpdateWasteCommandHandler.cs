@@ -7,10 +7,10 @@ namespace WasteControl.Application.Commands.Wastes.UpdateWaste
 {
     internal sealed class UpdateWasteCommandHandler : IRequestHandler<UpdateWasteCommand>
     {
-        private readonly IRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IRepository<Waste> _wasteRepository;
 
-        public UpdateWasteCommandHandler(IRepository<User> userRepository, IRepository<Waste> wasteRepository)
+        public UpdateWasteCommandHandler(IUserRepository userRepository, IRepository<Waste> wasteRepository)
         {
             _userRepository = userRepository;
             _wasteRepository = wasteRepository;

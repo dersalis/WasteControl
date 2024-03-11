@@ -22,7 +22,9 @@ namespace WasteControl.Infrastructure.DAL
                 .All()
                 .WithFactory(() => new User(
                     new UserName(Faker.Name.FullName()),
-                    new Email(Faker.Internet.Email())
+                    new Login(Faker.Internet.UserName()),
+                    new Email(Faker.Internet.Email()),
+                    new Password(Faker.Name.FullName())
                 ))
                 .Build()
                 .ToList();

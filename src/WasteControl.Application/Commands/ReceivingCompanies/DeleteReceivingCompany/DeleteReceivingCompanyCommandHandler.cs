@@ -8,9 +8,9 @@ namespace WasteControl.Application.Commands.ReceivingCompanies.DeleteReceivingCo
     internal sealed class DeleteReceivingCompanyCommandHandler : IRequestHandler<DeleteReceivingCompanyCommand>
     {
         private readonly IRepository<ReceivingCompany> _receivingCompanyRepository;
-        private readonly IRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public DeleteReceivingCompanyCommandHandler(IRepository<ReceivingCompany> receivingCompanyRepository, IRepository<User> userRepository)
+        public DeleteReceivingCompanyCommandHandler(IRepository<ReceivingCompany> receivingCompanyRepository, IUserRepository userRepository)
         {
             _receivingCompanyRepository = receivingCompanyRepository;
             _userRepository = userRepository;

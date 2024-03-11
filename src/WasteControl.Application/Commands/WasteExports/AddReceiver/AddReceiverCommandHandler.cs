@@ -8,10 +8,10 @@ namespace WasteControl.Application.Commands.WasteExports.AddReceiver
     internal sealed class AddReceiverCommandHandler : IRequestHandler<AddReceiverCommand>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
-        private readonly IRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IRepository<ReceivingCompany> _receivingCompanyRepository;
 
-        public AddReceiverCommandHandler(IRepository<WasteExport> wasteExportRepository, IRepository<User> userRepository, IRepository<ReceivingCompany> receivingCompanyRepository)
+        public AddReceiverCommandHandler(IRepository<WasteExport> wasteExportRepository, IUserRepository userRepository, IRepository<ReceivingCompany> receivingCompanyRepository)
         {
             _wasteExportRepository = wasteExportRepository;
             _userRepository = userRepository;

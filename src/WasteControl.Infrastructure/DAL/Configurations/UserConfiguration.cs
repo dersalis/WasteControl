@@ -59,10 +59,25 @@ namespace WasteControl.Infrastructure.DAL.Configurations
                     v => v.Value,
                     v => new UserName(v));
 
+            builder.Property(x => x.Login)
+                .HasConversion(
+                    v => v.Value,
+                    v => new Login(v));
+
             builder.Property(x => x.Email)
                 .HasConversion(
                     v => v.Value,
                     v => new Email(v));
+
+            builder.Property(x => x.Password)
+                .HasConversion(
+                    v => v.Value,
+                    v => new Password(v));
+
+            builder.Property(x => x.Role)
+                .HasConversion(
+                    v => v.Value,
+                    v => new Role(v));
                 
             builder.HasMany<WasteExport>()
                 .WithOne(x => x.CreatedBy)

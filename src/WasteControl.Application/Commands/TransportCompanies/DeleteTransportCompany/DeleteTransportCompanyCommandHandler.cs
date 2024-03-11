@@ -8,9 +8,9 @@ namespace WasteControl.Application.Commands.TransportCompanies.DeleteTransportCo
     internal sealed class DeleteTransportCompanyCommandHandler : IRequestHandler<DeleteTransportCompanyCommand>
     {
         private readonly IRepository<TransportCompany> _transportCompanyRepository;
-        private readonly IRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public DeleteTransportCompanyCommandHandler(IRepository<TransportCompany> transportCompanyRepository, IRepository<User> userRepository)
+        public DeleteTransportCompanyCommandHandler(IRepository<TransportCompany> transportCompanyRepository, IUserRepository userRepository)
         {
             _transportCompanyRepository = transportCompanyRepository;
             _userRepository = userRepository;

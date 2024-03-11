@@ -5,7 +5,7 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Infrastructure.DAL.Repositories.Postgres
 {
-    public class PostgresUserRepository : IRepository<User>
+    public class PostgresUserRepository : IUserRepository
     {
         private readonly WasteControlDbContext _dbContext;
 
@@ -42,6 +42,16 @@ namespace WasteControl.Infrastructure.DAL.Repositories.Postgres
                 .Include(u => u.CreatedBy)
                 .Include(u => u.ModifiedBy)
                 .FirstOrDefaultAsync(u => u.Id == (ID)id);
+
+            return result;
+        }
+
+        public async Task<User> GetAsync(Email email)
+        {
+            var result = await _dbContext.Users
+                .Include(u => u.CreatedBy)
+                .Include(u => u.ModifiedBy)
+                .FirstOrDefaultAsync(u => u.Email == email);
 
             return result;
         }
