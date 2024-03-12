@@ -7,9 +7,9 @@ namespace WasteControl.Application.Commands.Users.DeleteUser
 {
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
     {
-        private readonly IRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public DeleteUserCommandHandler(IRepository<User> userRepository)
+        public DeleteUserCommandHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

@@ -7,8 +7,8 @@ namespace WasteControl.Application.Commands.TransportCompanies.UpdateTransportCo
 {
     internal sealed class UpdateTransportCompanyCommandHandler : IRequestHandler<UpdateTransportCompanyCommand>
     {
-        private readonly IUserRepository _transportCompanyRepository;
-        private readonly IRepository<User> _userRepository;
+        private readonly IRepository<TransportCompany> _transportCompanyRepository;
+        private readonly IUserRepository _userRepository;
         
         public UpdateTransportCompanyCommandHandler(IRepository<TransportCompany> transportCompanyRepository, IUserRepository userRepository)
         {

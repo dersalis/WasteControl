@@ -7,10 +7,10 @@ namespace WasteControl.Application.Commands.Wastes.CreateWaste
 {
     internal sealed class CreateWasteCommandHandler : IRequestHandler<CreateWasteCommand, Guid>
     {
-        private readonly IRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IRepository<Waste> _wasteRepository;
 
-        public CreateWasteCommandHandler(IRepository<User> userRepository, IRepository<Waste> wasteRepository)
+        public CreateWasteCommandHandler(IUserRepository userRepository, IRepository<Waste> wasteRepository)
         {
             _userRepository = userRepository;
             _wasteRepository = wasteRepository;

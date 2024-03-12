@@ -1,3 +1,5 @@
+using WasteControl.Core.Exceptions;
+
 namespace WasteControl.Core.ValueObjects
 {
     public sealed record Password
