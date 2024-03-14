@@ -1,0 +1,44 @@
+@url = http://localhost:5012
+
+###
+GET {{url}}/users
+Accept: application/json
+
+###
+GET {{url}}/users/getbyid/00c43119-63f6-44ed-a796-2bd7d7a1e390
+Accept: application/json
+
+###
+GET {{url}}/users/getbyemail/otis@renner.us
+Accept: application/json
+
+
+POST {{url}}/users
+Content-Type: application/json
+
+{
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "name": "TestowyCR",
+    "login": "testcr",
+    "email": "cr@wp.pl",
+    "password": "string",
+    "role": "user"
+}
+
+
+###
+PUT {{url}}/users/00c43119-63f6-44ed-a796-2bd7d7a1e390
+Content-Type: application/json
+
+{
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "name": "TestowyUP",
+    "login": "testup",
+    "email": "tu@wp.pl",
+    "password": "string",
+    "role": "admin"
+}
+
+###
+DELETE {{url}}/users/ab3ef5ce-136b-46da-bb4e-f115bd8555d9
+Accept: application/json

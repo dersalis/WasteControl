@@ -30,6 +30,7 @@ namespace WasteControl.Infrastructure.DAL
 
             services.AddHostedService<DatabaseInitializer>();
 
+
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             
             return services;

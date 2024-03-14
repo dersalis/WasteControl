@@ -26,7 +26,7 @@ PUT {{url}}/wastes/{{selected}}
 Content-Type: application/json
 
 {
-    "id": "ab3ef5ce-136b-46da-bb4e-f115bd8555d9",
+  "id": "ab3ef5ce-136b-46da-bb4e-f115bd8555d9",
   "code": "TEST-999",
   "name": "Test 999 description",
   "quantity": 20,
