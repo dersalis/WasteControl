@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using WasteControl.Core.Entities;
 using WasteControl.Infrastructure.Abstractions;
 using WasteControl.Infrastructure.DAL;
@@ -20,12 +21,33 @@ namespace WasteControl.Infrastructure
                 .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
                 .AddSingleton<IPasswordManager, PasswordManager>();
 
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen(swagger => 
+            {
+                swagger.EnableAnnotations();
+                swagger.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "WasteControl API",
+                    Version = "v1"
+                });
+            });
+
             return services;
         }
 
         public static WebApplication UseInfrastructure(this WebApplication app)
         {
             app.UseMiddleware<ExceptionMidelware>();
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+            // app.UseReDoc(reDoc => 
+            // {
+            //     reDoc.RoutePrefix = "docs";
+            //     reDoc.DocumentTitle = "WasteControl API";
+            //     reDoc.SpecUrl = "/swagger/v1/swagger.json";
+            // });
+
             return app;
         }
     }

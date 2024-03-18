@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using WasteControl.Application.Commands.ReceivingCompanies.CreateReceivingCompany;
 using WasteControl.Application.Commands.TransportCompanies.DeleteTransportCompany;
 using WasteControl.Application.Commands.TransportCompanies.UpdateTransportCompany;
@@ -17,6 +18,10 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(
+            Summary = "Get all transport companies",
+            Description = "Get all transport companies from the database"
+        )]
         public async Task<IActionResult> GetAll()
         {
             var wastes = await _mediator.Send(new GetTransportCompaniesQuery());
@@ -25,6 +30,10 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [SwaggerOperation(
+            Summary = "Get transport company by id",
+            Description = "Get transport company from the database by id"
+        )]
         public async Task<IActionResult> Get([FromRoute] Guid id)
         {
             var waste = await _mediator.Send(new GetTransportCompanyByIdQuery() { Id = id });
@@ -35,6 +44,10 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Create transport company",
+            Description = "Create transport company in the database"
+        )]
         public async Task<IActionResult> Create([FromBody] CreateReceivingCompanyCommand command)
         {
             Guid? id = await _mediator.Send(command);
@@ -45,6 +58,10 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [SwaggerOperation(
+            Summary = "Update transport company",
+            Description = "Update transport company in the database"
+        )]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateTransportCompanyCommand command)
         {
             if (id != command.Id)
@@ -56,6 +73,10 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpDelete("{id:guid}")]
+        [SwaggerOperation(
+            Summary = "Delete transport company",
+            Description = "Delete transport company from the database"
+        )]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             await _mediator.Send(new DeleteTransportCompanyCommand() { Id = id });
