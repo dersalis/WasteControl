@@ -16,7 +16,7 @@ namespace WasteControl.Application.Queries.Users.GetUserById
 
         public async Task<UserDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetAsync(request.Id);
+            var user = await _userRepository.GetByIdAsync(request.Id);
 
             if (user is null)
                 return default;

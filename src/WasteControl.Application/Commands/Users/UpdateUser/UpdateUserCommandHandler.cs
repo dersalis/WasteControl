@@ -22,7 +22,7 @@ namespace WasteControl.Application.Commands.Users.UpdateUser
             if (user is null)
                 throw new UserNotFoundException();
 
-            User userToUpdate = await _userRepository.GetAsync(request.Id);
+            User userToUpdate = await _userRepository.GetByIdAsync(request.Id);
 
             if (userToUpdate is null)
                 throw new UserNotFoundException();

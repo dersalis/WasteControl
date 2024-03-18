@@ -22,7 +22,7 @@ namespace WasteControl.Application.Commands.Users.DeleteUser
             if (user is null)
                 throw new UserNotFoundException();
 
-            User userToDelete = await _userRepository.GetAsync(request.Id);
+            User userToDelete = await _userRepository.GetByIdAsync(request.Id);
 
             if (userToDelete is null)
                 throw new UserNotFoundException();

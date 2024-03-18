@@ -16,7 +16,7 @@ namespace WasteControl.Application.Queries.Users.GetUserByEmail
 
         public async Task<UserDto> Handle(GetUserByEmailQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetAsync(request.Email);
+            var user = await _userRepository.GetByEmailAsync(request.Email);
 
             if (user is null)
                 return default;

@@ -22,7 +22,7 @@ namespace WasteControl.Infrastructure.DAL.Repositories.Postgres
 
         public async Task DeleteAsync(Guid id)
         {
-            _dbContext.Remove(GetAsync(id));
+            _dbContext.Remove(GetByIdAsync(id));
             await _dbContext.SaveChangesAsync();
         }
 
@@ -36,7 +36,7 @@ namespace WasteControl.Infrastructure.DAL.Repositories.Postgres
             return result.AsEnumerable();
         }
 
-        public async Task<User> GetAsync(Guid id)
+        public async Task<User> GetByIdAsync(Guid id)
         {
             var result = await _dbContext.Users
                 .Include(u => u.CreatedBy)
@@ -46,7 +46,7 @@ namespace WasteControl.Infrastructure.DAL.Repositories.Postgres
             return result;
         }
 
-        public async Task<User> GetAsync(Email email)
+        public async Task<User> GetByEmailAsync(Email email)
         {
             var result = await _dbContext.Users
                 .Include(u => u.CreatedBy)
@@ -60,6 +60,16 @@ namespace WasteControl.Infrastructure.DAL.Repositories.Postgres
         {
             _dbContext.Update(entity);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<User> GetByLoginAsync(Login login)
+        {
+            var result = await _dbContext.Users
+                .Include(u => u.CreatedBy)
+                .Include(u => u.ModifiedBy)
+                .FirstOrDefaultAsync(u => u.Login == login);
+
+            return result;
         }
     }
 }

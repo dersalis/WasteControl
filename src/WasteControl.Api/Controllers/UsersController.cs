@@ -51,7 +51,7 @@ namespace WasteControl.Api.Controllers
             Guid? id = await _mediator.Send(command);
 
             return id is not null
-                ? CreatedAtAction(nameof(Get), new { id }, id)
+                ? CreatedAtAction(nameof(GetById), new { id }, id)
                 : BadRequest();
         }
 

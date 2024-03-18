@@ -12,15 +12,14 @@ Accept: application/json
 GET {{url}}/users/getbyemail/otis@renner.us
 Accept: application/json
 
-
+###
 POST {{url}}/users
 Content-Type: application/json
 
 {
-    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    "name": "TestowyCR",
-    "login": "testcr",
-    "email": "cr@wp.pl",
+    "name": "TestowyCR_02",
+    "login": "testcr_02",
+    "email": "cr02@wp.pl",
     "password": "string",
     "role": "user"
 }
