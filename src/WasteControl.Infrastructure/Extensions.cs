@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using WasteControl.Core.Entities;
-using WasteControl.Infrastructure.Abstractions;
+using WasteControl.Infrastructure.Auth;
 using WasteControl.Infrastructure.DAL;
 using WasteControl.Infrastructure.Exceptions;
 using WasteControl.Infrastructure.Security;
@@ -15,13 +13,15 @@ namespace WasteControl.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddControllers();
             services.AddSingleton<ExceptionMidelware>();
+            services.AddHttpContextAccessor();
+            
             services.AddPostgres(configuration);
-            services
-                .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
-                .AddSingleton<IPasswordManager, PasswordManager>();
+            services.AddSecurity();
 
             services.AddEndpointsApiExplorer();
+
             services.AddSwaggerGen(swagger => 
             {
                 swagger.EnableAnnotations();
@@ -31,6 +31,8 @@ namespace WasteControl.Infrastructure
                     Version = "v1"
                 });
             });
+
+            services.AddAuth(configuration);
 
             return services;
         }
@@ -47,6 +49,10 @@ namespace WasteControl.Infrastructure
             //     reDoc.DocumentTitle = "WasteControl API";
             //     reDoc.SpecUrl = "/swagger/v1/swagger.json";
             // });
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.MapControllers();
 
             return app;
         }
