@@ -4,6 +4,25 @@
 GET {{url}}/users
 Accept: application/json
 
+
+###
+# @name sing_in
+POST {{url}}/users/sign-in
+Content-Type: application/json
+
+{
+  "email": "cr02@wp.pl",
+  "password": "string"
+}
+
+###
+@accessToken = {{sing_in.response.body.accessToken}}
+
+###
+GET {{url}}/users/getmetest
+Authorization: Bearer {{accessToken}}
+
+
 ###
 GET {{url}}/users/getbyid/00c43119-63f6-44ed-a796-2bd7d7a1e390
 Accept: application/json

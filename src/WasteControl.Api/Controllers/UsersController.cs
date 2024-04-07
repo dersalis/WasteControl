@@ -1,12 +1,16 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using WasteControl.Application.Commands.Users.CreateUser;
 using WasteControl.Application.Commands.Users.DeleteUser;
+using WasteControl.Application.Commands.Users.SignIn;
 using WasteControl.Application.Commands.Users.UpdateUser;
 using WasteControl.Application.Queries.Users.GetUserByEmail;
 using WasteControl.Application.Queries.Users.GetUserById;
 using WasteControl.Application.Queries.Users.GetUsers;
+using WasteControl.Auth;
+using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Api.Controllers
 {
@@ -14,8 +18,15 @@ namespace WasteControl.Api.Controllers
     [Route("users")]
     public class UsersController : ControllerBaseApi
     {
-        public UsersController(IMediator mediator) : base(mediator)
+        private readonly IAuthenticator _authenticator;
+        private readonly ITokenStorage _tokenStorage;
+
+        public UsersController(IMediator mediator, 
+            IAuthenticator authenticator,
+            ITokenStorage tokenStorage) : base(mediator)
         {
+            _authenticator = authenticator;
+            _tokenStorage = tokenStorage;
         }
 
         [HttpGet]
@@ -97,6 +108,46 @@ namespace WasteControl.Api.Controllers
             await _mediator.Send(new DeleteUserCommand() { Id = id });
 
             return NoContent();
+        }
+
+        [HttpPost("sign-in")]
+        public async Task<ActionResult<JwtDto>> SignIn([FromBody] SignInCommand command)
+        {
+            await _mediator.Send(command);
+            var jwt = _tokenStorage.Get();
+
+            return Ok(jwt);
+        }
+
+
+        // [HttpGet("jwttest")]
+        // public async Task<ActionResult> GetJwtTest()
+        // {
+        //     var userId = new Guid("00c43119-63f6-44ed-a796-2bd7d7a1e390");
+        //     var role = "user";
+        //     var jwt = _authenticator.CreateToken(userId, role);
+
+        //     return Ok(jwt);
+        // }
+
+        [HttpGet("getmetest")]
+        [Authorize]
+        public async Task<ActionResult> GetMeTest()
+        {
+            var userName = HttpContext.User.Identity?.Name;
+            if (string.IsNullOrEmpty(userName))
+            {
+                return NotFound();
+            }
+
+            var userId = Guid.Parse(userName);
+            var user = await _mediator.Send(new GetUserByIdQuery() { Id = userId });
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
         }
     }
 }
