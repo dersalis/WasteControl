@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using WasteControl.Application.Commands.ReceivingCompanies.CreateReceivingCompany;
@@ -18,6 +19,7 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles="admin, user")]
         [SwaggerOperation(
             Summary = "Get all transport companies",
             Description = "Get all transport companies from the database"
@@ -30,6 +32,7 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [Authorize(Roles="admin, user")]
         [SwaggerOperation(
             Summary = "Get transport company by id",
             Description = "Get transport company from the database by id"
@@ -44,12 +47,14 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles="admin, user")]
         [SwaggerOperation(
             Summary = "Create transport company",
             Description = "Create transport company in the database"
         )]
         public async Task<IActionResult> Create([FromBody] CreateReceivingCompanyCommand command)
         {
+            command.UserId = GetUserId();
             Guid? id = await _mediator.Send(command);
 
             return id is not null
@@ -58,6 +63,7 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [Authorize(Roles="admin, user")]
         [SwaggerOperation(
             Summary = "Update transport company",
             Description = "Update transport company in the database"
@@ -67,19 +73,21 @@ namespace WasteControl.Api.Controllers
             if (id != command.Id)
                 return BadRequest();
 
+            command.UserId = GetUserId();
             await _mediator.Send(command);
 
             return NoContent();
         }
 
         [HttpDelete("{id:guid}")]
+        [Authorize(Roles="admin, user")]
         [SwaggerOperation(
             Summary = "Delete transport company",
             Description = "Delete transport company from the database"
         )]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            await _mediator.Send(new DeleteTransportCompanyCommand() { Id = id });
+            await _mediator.Send(new DeleteTransportCompanyCommand() { Id = id, UserId = GetUserId()});
 
             return NoContent();
         }

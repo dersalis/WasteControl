@@ -17,7 +17,7 @@ namespace WasteControl.Application.Commands.Users.DeleteUser
         public async Task Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
             DateTime currentDate = DateTime.Now;
-            User user = (await _userRepository.GetAllAsync()).FirstOrDefault(); //TODO: Zmienic User
+            User user = request.UserId.HasValue ? await _userRepository.GetByIdAsync(request.UserId.Value) : null;
 
             if (user is null)
                 throw new UserNotFoundException();

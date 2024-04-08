@@ -2,7 +2,7 @@ using MediatR;
 
 namespace WasteControl.Application.Commands.Users.UpdateUser
 {
-    public class UpdateUserCommand : IRequest
+    public class UpdateUserCommand : CommandBase, IRequest
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

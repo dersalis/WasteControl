@@ -30,6 +30,7 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles="admin, user")]
         [SwaggerOperation(
             Summary = "Get all users",
             Description = "Get all users from the database"
@@ -42,6 +43,7 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpGet("getbyid/{id:guid}")]
+        [Authorize(Roles="admin, user")]
         [SwaggerOperation(
             Summary = "Get user by id",
             Description = "Get user from the database by id"
@@ -56,6 +58,7 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpGet("getbyemail/{email}")]
+        [Authorize(Roles="admin, user")]
         [SwaggerOperation(
             Summary = "Get user by email",
             Description = "Get user from the database by email"
@@ -70,12 +73,14 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles="admin, user")]
         [SwaggerOperation(
             Summary = "Create user",
             Description = "Create user in the database"
         )]
         public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
         {
+            command.UserId = GetUserId();
             Guid? id = await _mediator.Send(command);
 
             return id is not null
@@ -84,6 +89,7 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [Authorize(Roles="admin")]
         [SwaggerOperation(
             Summary = "Update user",
             Description = "Update user in the database"
@@ -93,24 +99,30 @@ namespace WasteControl.Api.Controllers
             if (id != command.Id)
                 return BadRequest();
 
+            command.UserId = GetUserId();
             await _mediator.Send(command);
 
             return NoContent();
         }
 
         [HttpDelete("{id:guid}")]
+        [Authorize(Roles="admin")]
         [SwaggerOperation(
             Summary = "Delete user",
             Description = "Delete user from the database"
         )]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            await _mediator.Send(new DeleteUserCommand() { Id = id });
+            await _mediator.Send(new DeleteUserCommand() { Id = id, UserId = GetUserId()});
 
             return NoContent();
         }
 
         [HttpPost("sign-in")]
+        [SwaggerOperation(
+            Summary = "Sign in",
+            Description = "Sign in to the system"
+        )]
         public async Task<ActionResult<JwtDto>> SignIn([FromBody] SignInCommand command)
         {
             await _mediator.Send(command);
@@ -119,35 +131,24 @@ namespace WasteControl.Api.Controllers
             return Ok(jwt);
         }
 
-
-        // [HttpGet("jwttest")]
-        // public async Task<ActionResult> GetJwtTest()
+        // [HttpGet("getmetest")]
+        // [Authorize]
+        // public async Task<ActionResult> GetMeTest()
         // {
-        //     var userId = new Guid("00c43119-63f6-44ed-a796-2bd7d7a1e390");
-        //     var role = "user";
-        //     var jwt = _authenticator.CreateToken(userId, role);
+        //     var userName = HttpContext.User.Identity?.Name;
+        //     if (string.IsNullOrEmpty(userName))
+        //     {
+        //         return NotFound();
+        //     }
 
-        //     return Ok(jwt);
+        //     var userId = Guid.Parse(userName);
+        //     var user = await _mediator.Send(new GetUserByIdQuery() { Id = userId });
+        //     if (user is null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     return Ok(user);
         // }
-
-        [HttpGet("getmetest")]
-        [Authorize]
-        public async Task<ActionResult> GetMeTest()
-        {
-            var userName = HttpContext.User.Identity?.Name;
-            if (string.IsNullOrEmpty(userName))
-            {
-                return NotFound();
-            }
-
-            var userId = Guid.Parse(userName);
-            var user = await _mediator.Send(new GetUserByIdQuery() { Id = userId });
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            return Ok(user);
-        }
     }
 }

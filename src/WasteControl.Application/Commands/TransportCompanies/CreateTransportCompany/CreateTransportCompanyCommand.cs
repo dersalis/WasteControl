@@ -2,7 +2,7 @@ using MediatR;
 
 namespace WasteControl.Application.Commands.TransportCompanies.CreateTransportCompany
 {
-    public class CreateTransportCompanyCommand : IRequest<Guid>
+    public class CreateTransportCompanyCommand : CommandBase, IRequest<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

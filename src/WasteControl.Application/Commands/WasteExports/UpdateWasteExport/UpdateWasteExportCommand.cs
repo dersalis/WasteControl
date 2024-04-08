@@ -2,7 +2,7 @@ using MediatR;
 
 namespace WasteControl.Application.Commands.WasteExports.UpdateWasteExport
 {
-    public class UpdateWasteExportCommand : IRequest
+    public class UpdateWasteExportCommand : CommandBase, IRequest
     {
         public Guid Id { get; set; }
         public Guid ReceivingCompanyOid { get; set; }

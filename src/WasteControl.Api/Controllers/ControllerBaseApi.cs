@@ -11,5 +11,17 @@ namespace WasteControl.Api.Controllers
         {
             _mediator = mediator;
         }
+
+        protected Guid? GetUserId()
+        {
+            string userName = HttpContext.User.Identity?.Name;
+
+            if (Guid.TryParse(userName, out Guid userId))
+            {
+                return userId;
+            }
+
+            return null;
+        }
     }
 }

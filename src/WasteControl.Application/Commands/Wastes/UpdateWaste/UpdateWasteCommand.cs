@@ -2,7 +2,7 @@ using MediatR;
 
 namespace WasteControl.Application.Commands.Wastes.UpdateWaste
 {
-    public class UpdateWasteCommand : IRequest
+    public class UpdateWasteCommand : CommandBase, IRequest
     {
         public Guid Id { get; set; }
         public string Code { get; set; }

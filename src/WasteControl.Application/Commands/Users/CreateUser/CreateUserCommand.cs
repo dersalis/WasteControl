@@ -2,7 +2,7 @@ using MediatR;
 
 namespace WasteControl.Application.Commands.Users.CreateUser
 {
-    public sealed class CreateUserCommand : IRequest<Guid>
+    public sealed class CreateUserCommand : CommandBase, IRequest<Guid>
     {
         public string Name { get; set; }
         public string Login { get; set; }    

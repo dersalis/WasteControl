@@ -2,6 +2,7 @@
 
 ###
 GET {{url}}/users
+Authorization: Bearer {{accessToken}}
 Accept: application/json
 
 
@@ -24,7 +25,8 @@ Authorization: Bearer {{accessToken}}
 
 
 ###
-GET {{url}}/users/getbyid/00c43119-63f6-44ed-a796-2bd7d7a1e390
+GET {{url}}/users/getbyid/e0e87a6d-50bd-4501-a364-772152b7ef0c
+Authorization: Bearer {{accessToken}}
 Accept: application/json
 
 ###
@@ -33,13 +35,14 @@ Accept: application/json
 
 ###
 POST {{url}}/users
+Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-    "name": "TestowyCR_02",
-    "login": "testcr_02",
-    "email": "cr02@wp.pl",
-    "password": "string",
+    "name": "TestowyCR_03",
+    "login": "testcr_03",
+    "email": "cr03@wp.pl",
+    "password": "P@$$w0rd",
     "role": "user"
 }
 

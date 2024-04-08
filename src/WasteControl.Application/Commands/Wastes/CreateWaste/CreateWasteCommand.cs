@@ -2,7 +2,7 @@ using MediatR;
 
 namespace WasteControl.Application.Commands.Wastes.CreateWaste
 {
-    public class CreateWasteCommand : IRequest<Guid>
+    public class CreateWasteCommand : CommandBase, IRequest<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

@@ -2,7 +2,7 @@ using MediatR;
 
 namespace WasteControl.Application.Commands.TransportCompanies.UpdateTransportCompany
 {
-    public class UpdateTransportCompanyCommand : IRequest
+    public class UpdateTransportCompanyCommand : CommandBase, IRequest
     {
         public Guid Id { get; set; }
         public string Code { get; set; }
