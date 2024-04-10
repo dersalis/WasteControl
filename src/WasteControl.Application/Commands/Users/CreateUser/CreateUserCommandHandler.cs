@@ -7,13 +7,13 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.Users.CreateUser
 {
-    public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
+    public sealed class CreateUserCommandHandler : CommandHandlerBase, IRequestHandler<CreateUserCommand, Guid>
     {
 
         private readonly IUserRepository _userRepository;
         private readonly IPasswordManager _passwordManager;
 
-        public CreateUserCommandHandler(IUserRepository userRepository, IPasswordManager passwordManager)
+        public CreateUserCommandHandler(IUserRepository userRepository, IPasswordManager passwordManager, IDateTimeProvider dateTimeProvider) : base(dateTimeProvider)
         {
             _userRepository = userRepository;
             _passwordManager = passwordManager;
@@ -21,7 +21,7 @@ namespace WasteControl.Application.Commands.Users.CreateUser
 
         public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            DateTime currentDate = DateTime.Now;
+            DateTime currentDate = await GetNowAsync();
             User user = request.UserId.HasValue ? await _userRepository.GetByIdAsync(request.UserId.Value) : null;
 
             if (user is null)

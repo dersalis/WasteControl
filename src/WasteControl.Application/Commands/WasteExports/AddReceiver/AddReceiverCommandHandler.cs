@@ -5,13 +5,13 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.WasteExports.AddReceiver
 {
-    internal sealed class AddReceiverCommandHandler : IRequestHandler<AddReceiverCommand>
+    internal sealed class AddReceiverCommandHandler : CommandHandlerBase, IRequestHandler<AddReceiverCommand>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
         private readonly IUserRepository _userRepository;
         private readonly IRepository<ReceivingCompany> _receivingCompanyRepository;
 
-        public AddReceiverCommandHandler(IRepository<WasteExport> wasteExportRepository, IUserRepository userRepository, IRepository<ReceivingCompany> receivingCompanyRepository)
+        public AddReceiverCommandHandler(IRepository<WasteExport> wasteExportRepository, IUserRepository userRepository, IRepository<ReceivingCompany> receivingCompanyRepository, IDateTimeProvider dateTimeProvider) : base(dateTimeProvider)
         {
             _wasteExportRepository = wasteExportRepository;
             _userRepository = userRepository;
@@ -20,7 +20,7 @@ namespace WasteControl.Application.Commands.WasteExports.AddReceiver
 
         public async Task Handle(AddReceiverCommand request, CancellationToken cancellationToken)
         {
-            DateTime currentDate = DateTime.Now;
+            DateTime currentDate = await GetNowAsync();
 
             User user = request.UserId.HasValue ? await _userRepository.GetByIdAsync(request.UserId.Value) : null;
             if (user is null)

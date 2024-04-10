@@ -5,13 +5,13 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.WasteExports.AddTransporter
 {
-    internal sealed class AddTransporterCommandHandler : IRequestHandler<AddTransporterCommand>
+    internal sealed class AddTransporterCommandHandler : CommandHandlerBase, IRequestHandler<AddTransporterCommand>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
         private readonly IUserRepository _userRepository;
         private readonly IRepository<TransportCompany> _transportCompanyRepository;
 
-        public AddTransporterCommandHandler(IRepository<WasteExport> wasteExportRepository, IUserRepository userRepository, IRepository<TransportCompany> transportCompanyRepository)
+        public AddTransporterCommandHandler(IRepository<WasteExport> wasteExportRepository, IUserRepository userRepository, IRepository<TransportCompany> transportCompanyRepository, IDateTimeProvider dateTimeProvider) : base(dateTimeProvider)
         {
             _wasteExportRepository = wasteExportRepository;
             _userRepository = userRepository;
@@ -20,7 +20,7 @@ namespace WasteControl.Application.Commands.WasteExports.AddTransporter
 
         public async Task Handle(AddTransporterCommand request, CancellationToken cancellationToken)
         {
-            DateTime currentDate = DateTime.Now;
+            DateTime currentDate = await GetNowAsync();
 
             User user = request.UserId.HasValue ? await _userRepository.GetByIdAsync(request.UserId.Value) : null;
             if (user is null)

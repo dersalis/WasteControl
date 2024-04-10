@@ -6,14 +6,14 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.WasteExports.CreateWasteExport
 {
-    internal sealed class CreateWasteExportCommandHandler : IRequestHandler<CreateWasteExportCommand, Guid>
+    internal sealed class CreateWasteExportCommandHandler : CommandHandlerBase, IRequestHandler<CreateWasteExportCommand, Guid>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
         private readonly IUserRepository _userRepository;
         private readonly IRepository<ReceivingCompany> _receivingCompanyRepository;
         private readonly IRepository<TransportCompany> _transportCompanyRepository;
 
-        public CreateWasteExportCommandHandler(IRepository<WasteExport> wasteExportRepository, IUserRepository userRepository, IRepository<ReceivingCompany> receivingCompanyRepository, IRepository<TransportCompany> transportCompanyRepository)
+        public CreateWasteExportCommandHandler(IRepository<WasteExport> wasteExportRepository, IUserRepository userRepository, IRepository<ReceivingCompany> receivingCompanyRepository, IRepository<TransportCompany> transportCompanyRepository, IDateTimeProvider dateTimeProvider) : base(dateTimeProvider)
         {
             _wasteExportRepository = wasteExportRepository;
             _userRepository = userRepository;
@@ -23,7 +23,7 @@ namespace WasteControl.Application.Commands.WasteExports.CreateWasteExport
 
         public async Task<Guid> Handle(CreateWasteExportCommand request, CancellationToken cancellationToken)
         {
-            DateTime currentDate = DateTime.Now;
+            DateTime currentDate = await GetNowAsync();
 
             User user = request.UserId.HasValue ? await _userRepository.GetByIdAsync(request.UserId.Value) : null;
             if (user is null)

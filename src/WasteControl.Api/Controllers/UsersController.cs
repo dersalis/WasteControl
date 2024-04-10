@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using WasteControl.Api.Filters;
 using WasteControl.Application.Commands.Users.CreateUser;
 using WasteControl.Application.Commands.Users.DeleteUser;
 using WasteControl.Application.Commands.Users.SignIn;
@@ -10,6 +11,7 @@ using WasteControl.Application.Queries.Users.GetUserByEmail;
 using WasteControl.Application.Queries.Users.GetUserById;
 using WasteControl.Application.Queries.Users.GetUsers;
 using WasteControl.Auth;
+using WasteControl.Core.Enums;
 using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Api.Controllers
@@ -30,7 +32,8 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles="admin, user")]
+        // [Authorize(Roles="admin, user")]
+        [Autohorization(UserRole.User)]
         [SwaggerOperation(
             Summary = "Get all users",
             Description = "Get all users from the database"
@@ -43,7 +46,8 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpGet("getbyid/{id:guid}")]
-        [Authorize(Roles="admin, user")]
+        // [Authorize(Roles="admin, user")]
+        [Autohorization(UserRole.User)]
         [SwaggerOperation(
             Summary = "Get user by id",
             Description = "Get user from the database by id"
@@ -58,7 +62,8 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpGet("getbyemail/{email}")]
-        [Authorize(Roles="admin, user")]
+        // [Authorize(Roles="admin, user")]
+        [Autohorization(UserRole.User)]
         [SwaggerOperation(
             Summary = "Get user by email",
             Description = "Get user from the database by email"
@@ -73,7 +78,8 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles="admin, user")]
+        // [Authorize(Roles="admin, user")]
+        [Autohorization(UserRole.Admin)]
         [SwaggerOperation(
             Summary = "Create user",
             Description = "Create user in the database"
@@ -89,7 +95,8 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        [Authorize(Roles="admin")]
+        // [Authorize(Roles="admin")]
+        [Autohorization(UserRole.Admin)]
         [SwaggerOperation(
             Summary = "Update user",
             Description = "Update user in the database"
@@ -106,7 +113,8 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpDelete("{id:guid}")]
-        [Authorize(Roles="admin")]
+        // [Authorize(Roles="admin")]
+        [Autohorization(UserRole.Admin)]
         [SwaggerOperation(
             Summary = "Delete user",
             Description = "Delete user from the database"
@@ -119,6 +127,7 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpPost("sign-in")]
+        [AllowAnonymous]
         [SwaggerOperation(
             Summary = "Sign in",
             Description = "Sign in to the system"

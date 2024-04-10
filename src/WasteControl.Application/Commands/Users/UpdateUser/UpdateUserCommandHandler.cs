@@ -5,11 +5,11 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.Users.UpdateUser
 {
-    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
+    public class UpdateUserCommandHandler : CommandHandlerBase, IRequestHandler<UpdateUserCommand>
     {
         private readonly IUserRepository _userRepository;
 
-        public UpdateUserCommandHandler(IUserRepository userRepository)
+        public UpdateUserCommandHandler(IUserRepository userRepository, IDateTimeProvider dateTimeProvider) : base(dateTimeProvider)
         {
             _userRepository = userRepository;
         }

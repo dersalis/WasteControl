@@ -5,18 +5,18 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.Users.DeleteUser
 {
-    public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
+    public class DeleteUserCommandHandler : CommandHandlerBase, IRequestHandler<DeleteUserCommand>
     {
         private readonly IUserRepository _userRepository;
 
-        public DeleteUserCommandHandler(IUserRepository userRepository)
+        public DeleteUserCommandHandler(IUserRepository userRepository, IDateTimeProvider dateTimeProvider) : base(dateTimeProvider)
         {
             _userRepository = userRepository;
         }
 
         public async Task Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            DateTime currentDate = DateTime.Now;
+            DateTime currentDate = await GetNowAsync();
             User user = request.UserId.HasValue ? await _userRepository.GetByIdAsync(request.UserId.Value) : null;
 
             if (user is null)

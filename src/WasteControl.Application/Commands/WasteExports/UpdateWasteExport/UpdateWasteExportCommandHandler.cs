@@ -5,14 +5,14 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.WasteExports.UpdateWasteExport
 {
-    internal sealed class UpdateWasteExportCommandHandler : IRequestHandler<UpdateWasteExportCommand>
+    internal sealed class UpdateWasteExportCommandHandler : CommandHandlerBase, IRequestHandler<UpdateWasteExportCommand>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
         private readonly IUserRepository _userRepository;
         private readonly IRepository<ReceivingCompany> _receivingCompanyRepository;
         private readonly IRepository<TransportCompany> _transportCompanyRepository;
 
-        public UpdateWasteExportCommandHandler(IRepository<WasteExport> wasteExportRepository, IUserRepository userRepository, IRepository<ReceivingCompany> receivingCompanyRepository, IRepository<TransportCompany> transportCompanyRepository)
+        public UpdateWasteExportCommandHandler(IRepository<WasteExport> wasteExportRepository, IUserRepository userRepository, IRepository<ReceivingCompany> receivingCompanyRepository, IRepository<TransportCompany> transportCompanyRepository, IDateTimeProvider dateTimeProvider) : base(dateTimeProvider)
         {
             _wasteExportRepository = wasteExportRepository;
             _userRepository = userRepository;
@@ -22,7 +22,7 @@ namespace WasteControl.Application.Commands.WasteExports.UpdateWasteExport
         
         public async Task Handle(UpdateWasteExportCommand request, CancellationToken cancellationToken)
         {
-            DateTime currentDate = DateTime.Now;
+            DateTime currentDate = await GetNowAsync();
 
             User user = request.UserId.HasValue ? await _userRepository.GetByIdAsync(request.UserId.Value) : null;
             if (user is null)

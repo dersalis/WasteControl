@@ -5,12 +5,12 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.WasteExports.DeleteWasteExport
 {
-    internal sealed class DeleteWasteExportHandler : IRequestHandler<DeleteWasteExportCommand>
+    internal sealed class DeleteWasteExportHandler : CommandHandlerBase, IRequestHandler<DeleteWasteExportCommand>
     {
         private readonly IRepository<WasteExport> _wasteExportRepository;
         private readonly IUserRepository _userRepository;
 
-        public DeleteWasteExportHandler(IUserRepository userRepository, IRepository<WasteExport> wasteExportRepository)
+        public DeleteWasteExportHandler(IUserRepository userRepository, IRepository<WasteExport> wasteExportRepository, IDateTimeProvider dateTimeProvider) : base(dateTimeProvider)
         {
             _userRepository = userRepository;
             _wasteExportRepository = wasteExportRepository;
@@ -18,7 +18,7 @@ namespace WasteControl.Application.Commands.WasteExports.DeleteWasteExport
 
         public async Task Handle(DeleteWasteExportCommand request, CancellationToken cancellationToken)
         {
-            DateTime currentDate = DateTime.Now;
+            DateTime currentDate = await GetNowAsync();
             User user = request.UserId.HasValue ? await _userRepository.GetByIdAsync(request.UserId.Value) : null;
 
             if (user is null)

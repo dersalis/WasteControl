@@ -5,12 +5,12 @@ using WasteControl.Infrastructure.Abstractions;
 
 namespace WasteControl.Application.Commands.Wastes.DeleteWaste
 {
-    internal sealed class DeleteWasteCommandHandler : IRequestHandler<DeleteWasteCommand>
+    internal sealed class DeleteWasteCommandHandler : CommandHandlerBase, IRequestHandler<DeleteWasteCommand>
     {
         private readonly IUserRepository _userRepository;
         private readonly IRepository<Waste> _wasteRepository;
 
-        public DeleteWasteCommandHandler(IUserRepository userRepository, IRepository<Waste> wasteRepository)
+        public DeleteWasteCommandHandler(IUserRepository userRepository, IRepository<Waste> wasteRepository, IDateTimeProvider dateTimeProvider) : base(dateTimeProvider)
         {
             _userRepository = userRepository;
             _wasteRepository = wasteRepository;
@@ -18,7 +18,7 @@ namespace WasteControl.Application.Commands.Wastes.DeleteWaste
         
         public async Task Handle(DeleteWasteCommand request, CancellationToken cancellationToken)
         {
-            DateTime currentDate = DateTime.Now;
+            DateTime currentDate = await GetNowAsync();
             User user = request.UserId.HasValue ? await _userRepository.GetByIdAsync(request.UserId.Value) : null;
 
             if (user is null)
