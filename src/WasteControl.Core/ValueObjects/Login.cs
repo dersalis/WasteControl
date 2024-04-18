@@ -8,7 +8,7 @@ namespace WasteControl.Core.ValueObjects
 
         public Login(string value)
         {
-            if (string.IsNullOrWhiteSpace(value) || value.Length is > 30 or < 3)
+            if (string.IsNullOrWhiteSpace(value) || value.Length is > 100 or < 3)
             {
                 throw new InvalidLoginException(value);
             }

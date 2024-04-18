@@ -22,10 +22,10 @@ namespace WasteControl.Application.Commands.Users.CreateUser
         public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             DateTime currentDate = await GetNowAsync();
-            User user = request.UserId.HasValue ? await _userRepository.GetByIdAsync(request.UserId.Value) : null;
+            // User user = request.UserId.HasValue ? await _userRepository.GetByIdAsync(request.UserId.Value) : null;
 
-            if (user is null)
-                throw new UserNotFoundException();
+            // if (user is null)
+            //     throw new UserNotFoundException();
 
             User userEmailExist = await _userRepository.GetByEmailAsync(request.Email);
             if(userEmailExist is not null)
@@ -46,7 +46,7 @@ namespace WasteControl.Application.Commands.Users.CreateUser
 
             newUser.ChangeRole(request.Role);
             newUser.ChangeCreateDate(currentDate);
-            newUser.ChangeCreatedBy(user);
+            // newUser.ChangeCreatedBy(user);
 
             await _userRepository.AddAsync(newUser);
 

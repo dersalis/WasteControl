@@ -78,8 +78,8 @@ namespace WasteControl.Api.Controllers
         }
 
         [HttpPost]
-        // [Authorize(Roles="admin, user")]
-        [Autohorization(UserRole.Admin)]
+        // [Autohorization(UserRole.Admin)]
+        [AllowAnonymous]
         [SwaggerOperation(
             Summary = "Create user",
             Description = "Create user in the database"
@@ -140,24 +140,24 @@ namespace WasteControl.Api.Controllers
             return Ok(jwt);
         }
 
-        // [HttpGet("getmetest")]
-        // [Authorize]
-        // public async Task<ActionResult> GetMeTest()
-        // {
-        //     var userName = HttpContext.User.Identity?.Name;
-        //     if (string.IsNullOrEmpty(userName))
-        //     {
-        //         return NotFound();
-        //     }
+        [HttpGet("getmetest")]
+        [Authorize]
+        public async Task<ActionResult> GetMeTest()
+        {
+            var userName = HttpContext.User.Identity?.Name;
+            if (string.IsNullOrEmpty(userName))
+            {
+                return NotFound();
+            }
 
-        //     var userId = Guid.Parse(userName);
-        //     var user = await _mediator.Send(new GetUserByIdQuery() { Id = userId });
-        //     if (user is null)
-        //     {
-        //         return NotFound();
-        //     }
+            var userId = Guid.Parse(userName);
+            var user = await _mediator.Send(new GetUserByIdQuery() { Id = userId });
+            if (user is null)
+            {
+                return NotFound();
+            }
 
-        //     return Ok(user);
-        // }
+            return Ok(user);
+        }
     }
 }
